@@ -5,7 +5,7 @@ require 'mastermind_sname/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "mastermind_sname"
-  spec.version       = MastermindSname::VERSION
+  spec.version       = "1.1"
   spec.authors       = ["Olumuyiwa Osiname"]
   spec.email         = ["olumuyiwa.osiname@andela.com"]
 
@@ -19,10 +19,13 @@ Gem::Specification.new do |spec|
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
-  spec.bindir        = "exe"
-  spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
+  #spec.files  = `git ls-files`.split($/)
+  #spec.bindir        = "bin"
+  # spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
+  spec.executables   = ["mastermind_sname"]
   spec.require_paths = ["lib"]
 
   spec.add_development_dependency "bundler", "~> 1.8"
-  spec.add_development_dependency "rake", "~> 10.0"
+  spec.add_development_dependency "rake"
 end
+

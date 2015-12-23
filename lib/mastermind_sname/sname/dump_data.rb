@@ -1,7 +1,6 @@
 module BuildRecord
 	class Sname
 		require 'json'
-		require 'pp'
 		def set_new_record(player_hash)
 			@player_hash = player_hash
 			@record = get_record
@@ -9,12 +8,12 @@ module BuildRecord
 			select_level
 		end 
 		def get_record
-			json = File.read("records.json")
+			json = File.read("game_records.json")
 			obj = JSON.parse(json)
 			return obj
 		end
 		
-
+		
 		def select_level
 			case @player_hash["level"]
 			when "b"
@@ -32,7 +31,7 @@ module BuildRecord
 			    "intermediate" => @record["intermediate"],
 			    "advanced" => @record["advanced"]
 			}
-			File.open("records.json","w") do |f|
+			File.open("game_records.json","w") do |f|
 			  f.write(tempHash.to_json)
 			end
 		end
@@ -43,7 +42,7 @@ module BuildRecord
 			    "intermediate" => @new_record,
 			    "advanced" => @record["advanced"]
 			}
-			File.open("records.json","w") do |f|
+			File.open("game_records.json","w") do |f|
 			  f.write(tempHash.to_json)
 			end
 		end
@@ -53,7 +52,7 @@ module BuildRecord
 			    "intermediate" => @record["intermediate"],
 			    "advanced" => @new_record
 			}
-			File.open("records.json","w") do |f|
+			File.open("game_records.json","w") do |f|
 			  f.write(tempHash.to_json)
 			end
 		end
@@ -71,7 +70,6 @@ module BuildRecord
 				break if n == record[level].length  || n == 10
 			}
 			
-
 		end
 	end
 end
