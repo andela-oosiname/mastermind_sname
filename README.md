@@ -1,3 +1,5 @@
+<a href="https://codeclimate.com/github/andela-oosiname/mastermind_sname"><img src="https://codeclimate.com/github/andela-oosiname/mastermind_sname/badges/gpa.svg" /></a>
+
 # MastermindSname
 
 Welcome to Mastermind by sname. An interactive gem packaged and played in a ruby environment. 
