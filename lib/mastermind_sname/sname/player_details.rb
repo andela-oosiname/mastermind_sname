@@ -8,7 +8,7 @@ module Player
   	end
 
   	def self.set_player_name
-  	    puts "Enter name"
+  	    puts "Enter first name"
   	    @name = gets.chomp.downcase
   	    @name.capitalize!
   	end 
@@ -26,8 +26,7 @@ module Player
     end
 
     def self.get_player
-    		player_hash = {"name" => @name, "level" => @level}
-
+    		{"name" => @name, "level" => @level}
     end
   end
 end

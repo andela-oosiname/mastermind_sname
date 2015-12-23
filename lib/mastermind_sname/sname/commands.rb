@@ -1,7 +1,7 @@
 require_relative "game.rb"
 module Commands
 	class SnameCommands
-		def self.command_action(to_do,colours,guesses)
+		def self.command_action(to_do,colours)
 			@game_colours = colours
 			quit_game if to_do == "quit" || to_do == "q"
 			cheat_mode if to_do == "cheat" || to_do == "c"
