@@ -63,12 +63,12 @@ module BuildRecord
 			record = get_record
 			level_record = record[level].sort_by { |hsh| hsh["guesses"] }
 			n = 0
-			loop {
+			record[level].length.times do
 				print "#{level_record[n]["name"]} solved #{level_record[n]["game_colours"]} in #{level_record[n]["guesses"]} guesses over #{level_record[n]["times"]}"
 				n += 1
 				print "\n"
-				break if n == record[level].length  || n == 10
-			}
+				break if n == 10
+			end
 			
 		end
 	end

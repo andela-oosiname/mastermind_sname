@@ -35,7 +35,7 @@ module Messages
 		end
 
 		def self.horizontal_stars
-			for i in (0..30) do
+			30.times do
 				print "* "
 			end
 			print "\n"

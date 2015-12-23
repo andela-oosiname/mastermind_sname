@@ -5,17 +5,16 @@ module Game
     attr_accessor :level,:game_colours,:user_colours,:number_of_guesses, :name
 
     def initialize_values
-
       @user_guess_count = 0
           @user_guess = ""
           @game_colours = GameColours::SnameGameColours.get_colours
           @user_guess_array = []
           @player_hash = Player::SnamePlayer.get_player
+          create_records_file  unless File.file?("game_records.json")
     end
 
     def play
       initialize_values
-      create_records_file  unless File.file?("game_records.json") 
       @player_hash["start_time"] = Timer::SnameTimer.set_time
       puts "#{@game_colours}"
       Messages::SnameMessages.start_message(@player_hash,@game_colours)
@@ -23,18 +22,11 @@ module Game
         @guess_left =  12 - @user_guess_count 
         collect_user_guess
         break if @user_guess == "cheat" || @user_guess == "quit" || @user_guess == "q" || @user_guess == "c" 
-        if @user_guess != "h"
-          @user_guess_count += 1 
-          @user_guess_array << @user_guess 
-          is_correct? 
-        end 
-        puts MyLogics::get_feedback(@user_guess,@game_colours)  unless  @user_guess == "h"
+        record_guess
       end 
-      update_player
-      unless MyLogics::is_input_command?(@user_guess) && @user_guess == "h"
-        Commands::SnameCommands.clear_screen
-        BuildRecord::Sname.new.set_new_record(@player_hash) if is_correct?
-        game_end if is_correct?     
+      unless MyLogics::is_input_command?(@user_guess)
+      Commands::SnameCommands.clear_screen    
+      game_end     
       end
     end
 
@@ -73,6 +65,7 @@ module Game
         Messages::SnameMessages.game_over_screen 
       else
         update_player
+        BuildRecord::Sname.new.set_new_record(@player_hash)
         Messages::SnameMessages.congratulations_screen(@player_hash)
         BuildRecord::Sname.new.display_top_ten(@player_hash)
       end
@@ -81,8 +74,7 @@ module Game
 
     def collect_user_guess
       valid = false
-      puts "You've taken #{@user_guess_array.length} guess(es) .... #{@guess_left}"\
-      "left" if @user_guess_array != [] && @user_guess != "h"
+      puts "You've taken #{@user_guess_array.length} guess(es) .... #{@guess_left} left" if @user_guess_array != [] && @user_guess != "h"
       @user_guess = gets.chomp.downcase
       if @user_guess == "h"
         valid = true
@@ -91,7 +83,7 @@ module Game
       until valid == true do
         if MyLogics::is_input_command?(@user_guess)
           valid = false
-          return Commands::SnameCommands.command_action(@user_guess,@game_colours,@user_guess_array) 
+          return Commands::SnameCommands.command_action(@user_guess,@game_colours) 
         end
         valid = MyLogics::check_guess?(@user_guess, @player_hash["level"])  if !valid
         puts MyLogics::check_guess_length?(@user_guess, @player_hash["level"])  if !valid
@@ -116,5 +108,15 @@ module Game
       end
       puts "Enter guess"
     end
+
+    def record_guess
+      if @user_guess != "h"
+        @user_guess_count += 1 
+        @user_guess_array << @user_guess 
+        is_correct? 
+        puts MyLogics::get_feedback(@user_guess,@game_colours)
+      end 
+    end
+
   end 
 end
