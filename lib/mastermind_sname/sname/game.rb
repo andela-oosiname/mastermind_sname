@@ -92,7 +92,6 @@ module Game
         if MyLogics::is_input_command?(@user_guess)
           valid = false
           return Commands::SnameCommands.command_action(@user_guess,@game_colours,@user_guess_array) 
-          break
         end
         valid = MyLogics::check_guess?(@user_guess, @player_hash["level"])  if !valid
         puts MyLogics::check_guess_length?(@user_guess, @player_hash["level"])  if !valid
@@ -110,7 +109,6 @@ module Game
     def get_guess_history
       puts "Guess History"
       if @user_guess_array.length > 0
-        n = 1
         for i in (0...@user_guess_array.length) do print " #{i+1} ==> #{@user_guess_array[i]} \n" end
         print "\n"
       else

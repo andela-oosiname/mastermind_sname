@@ -4,7 +4,7 @@ module Timer
     def self.set_time
       time = Time.now
       time_array = [time.hour, time.min, time.sec]
-      time_in_secs = (time_array[0] * 3600) + (time_array[1] * 60) + time_array[2]
+      (time_array[0] * 3600) + (time_array[1] * 60) + time_array[2]
     end
 
     # def self.set_end_time
@@ -14,7 +14,6 @@ module Timer
     # end
 
     def self.format_time
-      secs = 0
       mins = 0
       while @time_interval > 59 do 
         mins = mins + @time_interval/60
