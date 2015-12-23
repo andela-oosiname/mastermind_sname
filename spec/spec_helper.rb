@@ -1,8 +1,7 @@
+ lib_master = File.expand_path('../../lib/mastermind_sname/sname', __FILE__)
+$LOAD_PATH.unshift(lib_master) unless $LOAD_PATH.include?(lib_master)
+
 require "mastermind_sname"
-
-# lib_master = File.expand_path('../../lib/mastermind/tobi', __FILE__)
-# $LOAD_PATH.unshift(lib_master) unless $LOAD_PATH.include?(lib_master)
-
 require 'timer'
 require 'game'
 require 'checkers'

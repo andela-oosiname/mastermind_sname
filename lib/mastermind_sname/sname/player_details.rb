@@ -1,5 +1,5 @@
-module Player
-  class SnamePlayer
+module SnamePlayer
+  class Player
   	attr_accessor :level, :name
 
   	def self.set_player
@@ -14,13 +14,13 @@ module Player
   	end 
 
     def self.set_level
-    		puts Messages::SnameMessages.get_level_message
+    		puts SnameMessages::Messages.get_level_message
     		level = gets.chomp.downcase
-    		status = MyLogics.is_valid_level?(level)
+    		status = SnameLogics::Logics.is_valid_level?(level)
     		while status == false do 
-    			puts Messages::SnameMessages.invalid_level
+    			puts SnameMessages::Messages.invalid_level
     			level = gets.chomp.downcase
-    			status = MyLogics.is_valid_level?(level)
+    			status = SnameLogics::Logics.is_valid_level?(level)
     		end
     		@level = level
     end
