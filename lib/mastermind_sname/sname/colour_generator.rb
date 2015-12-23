@@ -20,15 +20,15 @@ module GameColours
 			
 			initial_colour_array = set_colours
 			set_length_of_colours
-			for i in (0...@code_length) do
-				final_colour_array << initial_colour_array.shuffle[0]
+			until final_colour_array.length == @code_length
+				final_colour_array << initial_colour_array.sample
 			end
 			final_colour_array 	
 		end
 
 		def self.set_colours
 			@player_hash = Player::SnamePlayer.get_player
-			case 
+			case @player_hash["level"]
 				when "b"
 					return beginner_colours
 				when "i"
