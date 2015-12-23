@@ -58,7 +58,7 @@ module BuildRecord
 		end
 
 		def display_top_ten(player_hash)
-			Messages::SnameMessages.top_ten_head
+			SnameMessages::Messages.top_ten_head
 			level = player_hash["full_level"]
 			record = get_record
 			level_record = record[level].sort_by { |hsh| hsh["guesses"] }

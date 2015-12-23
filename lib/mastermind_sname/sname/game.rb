@@ -1,15 +1,15 @@
 require_relative "commands.rb"
 require_relative "dump_data.rb"
-module Game
-  class SnameGame
+module SnameGame
+  class Game
     attr_accessor :level,:game_colours,:user_colours,:number_of_guesses, :name
 
     def initialize_values
       @user_guess_count = 0
           @user_guess = ""
-          @game_colours = GameColours::SnameGameColours.get_colours
           @user_guess_array = []
-          @player_hash = Player::SnamePlayer.get_player
+          @player_hash = SnamePlayer::Player.get_player
+          @game_colours = SnameGameColours::GameColours.get_colours(@player_hash["level"])
           create_records_file  unless File.file?("game_records.json")
     end
 
@@ -17,15 +17,15 @@ module Game
       initialize_values
       @player_hash["start_time"] = Timer::SnameTimer.set_time
       puts "#{@game_colours}"
-      Messages::SnameMessages.start_message(@player_hash,@game_colours)
+      SnameMessages::Messages.start_message(@player_hash,@game_colours)
       while @user_guess_count <= 11 && !is_correct? do
         @guess_left =  12 - @user_guess_count 
         collect_user_guess
         break if @user_guess == "cheat" || @user_guess == "quit" || @user_guess == "q" || @user_guess == "c" 
         record_guess
       end 
-      unless MyLogics::is_input_command?(@user_guess)
-      Commands::SnameCommands.clear_screen    
+      unless SnameLogics::Logics.is_input_command?(@user_guess)
+      SnameCommands::Commands.clear_screen    
       game_end     
       end
     end
@@ -62,11 +62,11 @@ module Game
 
     def game_end
       if  @user_guess_count > 11
-        Messages::SnameMessages.game_over_screen 
+        SnameMessages::Messages.game_over_screen 
       else
         update_player
         BuildRecord::Sname.new.set_new_record(@player_hash)
-        Messages::SnameMessages.congratulations_screen(@player_hash)
+        SnameMessages::Messages.congratulations_screen(@player_hash)
         BuildRecord::Sname.new.display_top_ten(@player_hash)
       end
       play_again
@@ -81,12 +81,12 @@ module Game
         get_guess_history
       end
       until valid == true do
-        if MyLogics::is_input_command?(@user_guess)
+        if SnameLogics::Logics.is_input_command?(@user_guess)
           valid = false
-          return Commands::SnameCommands.command_action(@user_guess,@game_colours) 
+          return SnameCommands::Commands.command_action(@user_guess,@game_colours) 
         end
-        valid = MyLogics::check_guess?(@user_guess, @player_hash["level"])  if !valid
-        puts MyLogics::check_guess_length?(@user_guess, @player_hash["level"])  if !valid
+        valid = SnameLogics::Logics.check_guess?(@user_guess, @player_hash["level"])  if !valid
+        puts SnameLogics::Logics.check_guess_length?(@user_guess, @player_hash["level"])  if !valid
         @user_guess = gets.chomp.downcase if !valid 
       end
     end
@@ -95,7 +95,7 @@ module Game
       puts "Do you want to play again? (y for yes/ press any other key to quit)"
       choice = gets.chomp.downcase
       MastermindSname::start if choice == "y"
-      Commands::SnameCommands.quit_game unless choice == "y"  
+      SnameCommands::Commands.quit_game unless choice == "y"  
     end
 
     def get_guess_history
@@ -114,7 +114,7 @@ module Game
         @user_guess_count += 1 
         @user_guess_array << @user_guess 
         is_correct? 
-        puts MyLogics::get_feedback(@user_guess,@game_colours)
+        puts SnameLogics::Logics.get_feedback(@user_guess,@game_colours)
       end 
     end
 
