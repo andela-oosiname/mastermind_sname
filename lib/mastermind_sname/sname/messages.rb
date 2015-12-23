@@ -23,7 +23,7 @@ module Messages
 			colours = GameColours::SnameGameColours.beginner_colours.join("") if game_colours.length == 4
 			colours = GameColours::SnameGameColours.intermediate_colours.join("") if game_colours.length == 6
 			colours = GameColours::SnameGameColours.advanced_colours.join("") if game_colours.length == 8
-			puts "Hello #{player_hash["name"]} I have generated a sequence with #{game_colours.length} elements made up of a combination of any of: #{colours}"
+			puts "Hello #{player_hash["name"]} I have generated a sequence with #{game_colours.length} elements made up of a combination of any of: #{colours}... Can you guess the colour"
 		end
 		
 
@@ -113,6 +113,19 @@ module Messages
 				print "="
 			end
 			print "\n"
+		end
+
+		def self.get_instructions
+			print "Instructions\nEnter p from splash screen to start a new game\n\nEnter your name and select a level
+				\nb - beginner, code is 4 elements long\ni - intermediate, code is 6 elements long\na - advanced, code is 8 elements long
+				\nRandom code of elements is generated depending on the level. You have 12 guesses
+				\nafter every guess, you are presented with a message identifying the number of elements you got correctly, and in what positions.
+				\nTo view entry history, enter h or history at any time.
+				\nTo view sequence generated, enter c or cheat at any time
+				\nTo quit the game at any point enter q or quit.
+				\nThe game is timed and on successful completion, the user gets a detail of his performance and a top players list is displayed"
+				puts ""
+				MastermindSname::start
 		end
 	end
 end

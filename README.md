@@ -1,14 +1,14 @@
 # MastermindSname
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/mastermind_sname`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Welcome to Mastermind by sname. An interactive gem packaged and played in a ruby environment. 
 
 ## Installation
 
+The User should have ruby set on his pc
+
 Add this line to your application's Gemfile:
 
-```ruby
+```rub
 gem 'mastermind_sname'
 ```
 
@@ -22,7 +22,27 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+A splash screen is showed once a game is started from where the user can start a game or read instructions.
+
+A random code of varying legth is generated depending on the level  selected by the user.
+
+You have twelve guesses per game.
+
+On every guess, you are presented with a message identifying the number of elements you got correctly, and in what positions.
+
+To view entry history, enter h or history at any time.
+To view sequence generated, enter c or cheat at any time
+To quit the game at any point enter q or quit.
+
+The game is timed and on successful completion, the user gets a detail of his performance and a top players list is displayed
+
+##  Development
+
+After checking out the repo, run mastermind for an interactive prompt that will allow you to experiment.
+
+To install this gem onto your local machine, run bundle exec rake install. To release a new version, update the version number in the GemSpec file, and then run bundle exec rake release to create a git tag for the version, push git commits and tags, and push the .gem file to rubygems.org.
+
+
 
 ## Development
 
@@ -32,7 +52,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/mastermind_sname/fork )
+1. Fork it ( https://github.com/andela-oosiname/mastermind_sname/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
