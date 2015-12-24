@@ -1,4 +1,5 @@
 <a href="https://codeclimate.com/github/andela-oosiname/mastermind_sname"><img src="https://codeclimate.com/github/andela-oosiname/mastermind_sname/badges/gpa.svg" /></a>
+[![Build Status](https://travis-ci.org/andela-oosiname/mastermind_sname.svg)](https://travis-ci.org/andela-oosiname/mastermind_sname)
 
 # MastermindSname
 
