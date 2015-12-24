@@ -6,16 +6,16 @@ module SnameGame
 
     def initialize_values
       @user_guess_count = 0
-          @user_guess = ""
-          @user_guess_array = []
-          @player_hash = SnamePlayer::Player.get_player
-          @game_colours = SnameGameColours::GameColours.get_colours(@player_hash["level"])
-          create_records_file  unless File.file?("game_records.json")
+      @user_guess = ""
+      @user_guess_array = []
+      @player_hash = SnamePlayer::Player.get_player
+      @game_colours = SnameGameColours::GameColours.get_colours(@player_hash["level"])
+      create_records_file  unless File.file?("game_records.json")
     end
 
     def play
       initialize_values
-      @player_hash["start_time"] = Timer::SnameTimer.set_time
+      @player_hash["start_time"] = SnameTimer::Timer.set_time
       puts "#{@game_colours}"
       SnameMessages::Messages.start_message(@player_hash,@game_colours)
       while @user_guess_count <= 11 && !is_correct? do
@@ -48,8 +48,8 @@ module SnameGame
       @player_hash["guesses_count"] = @user_guess_array.length
       @player_hash["full_level"] = get_full_level_name
       @player_hash["game_colours"] = @game_colours 
-      @player_hash["end_time"] = Timer::SnameTimer.set_time
-      @player_hash["time"] = Timer::SnameTimer.get_time_taken(@player_hash["start_time"],@player_hash["end_time"])
+      @player_hash["end_time"] = SnameTimer::Timer.set_time
+      @player_hash["time"] = SnameTimer::Timer.get_time_taken(@player_hash["start_time"],@player_hash["end_time"])
     end
 
     def get_full_level_name
