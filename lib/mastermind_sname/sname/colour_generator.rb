@@ -16,8 +16,8 @@ module SnameGameColours
 		end
 
 
-		def self.set_colours
-			case @level
+		def self.set_colours(level)
+			case level
 				when "b"
 					return beginner_colours
 				when "i"
@@ -30,7 +30,7 @@ module SnameGameColours
 		def self.get_colours(level)
 			@level = level
 			final_colour_array = []
-			initial_colour_array = set_colours
+			initial_colour_array = set_colours(level)
 			set_length_of_colours
 			until final_colour_array.length == @code_length
 				final_colour_array << initial_colour_array.sample

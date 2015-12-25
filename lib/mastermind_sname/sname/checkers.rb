@@ -40,7 +40,6 @@ module SnameLogics
       return true if guess.length == 4 && level == "b"
       return true if guess.length == 6 && level == "i"
       return true if guess.length == 8 && level == "a"
-
     end
 
     def self.get_no_correct_elements

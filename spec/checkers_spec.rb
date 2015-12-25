@@ -57,4 +57,21 @@ describe SnameLogics::Logics do
         expect(SnameLogics::Logics.get_feedback(guess_2,code_2.split(""))).to eq ("bggyyb has 3 of the correct elements with 2 in the correct positions")
       end
     end
+
+    describe "#check_guess?" do
+
+      it "returns true " do
+        expect(SnameLogics::Logics.check_guess?("asdf","b")).to be true
+      end
+
+       it "returns true " do
+        expect(SnameLogics::Logics.check_guess?("asdfsd","i")).to be true
+      end
+
+       it "returns true " do
+        expect(SnameLogics::Logics.check_guess?("asdfasdf","a")).to be true
+      end
+
+    end
+    
 end
