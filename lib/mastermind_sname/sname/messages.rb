@@ -76,7 +76,6 @@ module SnameMessages
 		def self.goodbye_message
 			message_border
 			puts "Thank you for playing MASTERMIND"
-			message_border
 		end
 
 		def self.cheat_message(colours)
