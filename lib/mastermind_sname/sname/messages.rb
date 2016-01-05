@@ -14,7 +14,7 @@ module SnameMessages
 			@player_hash = player_hash
 			horizontal_stars
 			vertical_stars
-			body_message
+			body_message(player_hash)
 			vertical_stars
 			horizontal_stars
 		end
@@ -50,13 +50,13 @@ module SnameMessages
 			end
 		end
 
-		def self.body_message
+		def self.body_message(player_hash)
 			blank_space(10)
-			puts "CONGRATULATIONS!! You got the sequence '#{@player_hash["game_colours"].join("")}'"
+			puts "CONGRATULATIONS!! You got the sequence '#{player_hash["game_colours"].join("")}'"
 			blank_space(10)
-			puts "LEVEL: #{@player_hash["full_level"]}"
+			puts "LEVEL: #{player_hash["full_level"]}"
 			blank_space(10)
-			puts "GUESSES: #{@player_hash["guesses_count"]}"
+			puts "GUESSES: #{player_hash["guesses_count"]}"
 		end
 
 		def self.blank_space(n)

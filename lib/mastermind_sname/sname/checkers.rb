@@ -10,23 +10,13 @@ module SnameLogics
     end
 
     def self.check_guess_length?(guess,level)
-      case level
-        when "b"
-          return "guess is too long" if guess.length > 4
-        when "i"
-          return "guess is too long" if guess.length > 6
-        when "a"
-          return "guess is too long" if guess.length > 8
+      result = case
+        when level == "b" && guess.length > 4 then return "guess is too long"
+        when level == "i" && guess.length > 6 then return "guess is too long"
+        when level == "a" && guess.length > 8 then return "guess is too long"     
       end
-            return "guess is too short" 
-
+      return "guess is too short" 
     end
-
-    # def self.check_input(guess,length)
-    #   @guess = guess
-    #   @length = length
-    #   check_guess_length(guess,length)
-    # end
 
     def self.is_input_command?(guess)
       return true if guess == "cheat" || guess == "exit" || guess == "h" || guess == "c" || guess == "q"

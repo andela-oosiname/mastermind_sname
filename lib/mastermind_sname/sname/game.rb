@@ -23,13 +23,22 @@ module SnameGame
     def start_guessing
       while @user_guess_count <= 11 && !is_correct? do
         collect_user_guess
-        break if @user_guess == "cheat" || @user_guess == "quit" || @user_guess == "q" || @user_guess == "c" 
+        break if is_quit? 
         puts record_guess
       end 
       unless SnameLogics::Logics.is_input_command?(@user_guess)  
         game_end 
       end
     end
+
+    def is_quit?
+      arr = ["cheat","quit","q","c"]
+      arr.each do |x|
+        return true if @user_guess == x
+      end
+        return false
+    end
+
 
     def is_correct?
       if @user_guess == @game_colours.join("")
