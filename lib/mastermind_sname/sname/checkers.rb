@@ -60,7 +60,8 @@ module SnameLogics
     def self.get_feedback(user_guess,colour_code)
       @user_guess = user_guess
       @colour_code = colour_code
-      return "#{@user_guess} has #{get_no_correct_elements} of the correct elements with #{get_no_correct_positions} in the correct positions"
+      feedback = "#{@user_guess} has #{get_no_correct_elements} of the correct elements with #{get_no_correct_positions} in the correct positions"
+      feedback
     end
   end
 end

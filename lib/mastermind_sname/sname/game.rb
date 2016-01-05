@@ -2,8 +2,7 @@ require_relative "commands.rb"
 require_relative "dump_data.rb"
 module SnameGame
   class Game
-    attr_accessor :level,:game_colours,:user_colours,:number_of_guesses, :name
-
+    attr_accessor :level,:game_colours,:user_colours,:number_of_guesses, :user_guess, :player_hash, :user_guess_array, :user_guess_count
     def initialize_values
       @user_guess_count = 0
       @user_guess = ""
@@ -16,17 +15,20 @@ module SnameGame
     def play
       initialize_values
       @player_hash["start_time"] = SnameTimer::Timer.set_time
-      puts "#{@game_colours}"
       SnameMessages::Messages.start_message(@player_hash,@game_colours)
+      start_guessing
+      play_again 
+    end
+
+    def start_guessing
       while @user_guess_count <= 11 && !is_correct? do
-        @guess_left =  12 - @user_guess_count 
         collect_user_guess
         break if @user_guess == "cheat" || @user_guess == "quit" || @user_guess == "q" || @user_guess == "c" 
-        record_guess
+        puts record_guess
       end 
       unless SnameLogics::Logics.is_input_command?(@user_guess)
-      SnameCommands::Commands.clear_screen    
-      game_end     
+        SnameCommands::Commands.clear_screen    
+        game_end 
       end
     end
 
@@ -40,6 +42,7 @@ module SnameGame
 
     def create_records_file
       system "echo '{\"beginner\":[],\"intermediate\":[],\"advanced\":[]}' > game_records.json"
+      File.file?("game_records.json")
     end
 
 
@@ -50,6 +53,7 @@ module SnameGame
       @player_hash["game_colours"] = @game_colours 
       @player_hash["end_time"] = SnameTimer::Timer.set_time
       @player_hash["time"] = SnameTimer::Timer.get_time_taken(@player_hash["start_time"],@player_hash["end_time"])
+      @player_hash
     end
 
     def get_full_level_name
@@ -69,12 +73,11 @@ module SnameGame
         SnameMessages::Messages.congratulations_screen(@player_hash)
         BuildRecord::Sname.new.display_top_ten(@player_hash)
       end
-      play_again
     end
 
     def collect_user_guess
       valid = false
-      puts "You've taken #{@user_guess_array.length} guess(es) .... #{@guess_left} left" if @user_guess_array != [] && @user_guess != "h"
+      puts "You've taken #{@user_guess_array.length} guess(es) ...." if @user_guess_array != [] && @user_guess != "h"
       @user_guess = gets.chomp.downcase
       if @user_guess == "h"
         valid = true
@@ -94,12 +97,11 @@ module SnameGame
     def play_again
       puts "Do you want to play again? (y for yes/ press any other key to quit)"
       choice = gets.chomp.downcase
-      MastermindSname::start if choice == "y"
+      MastermindSname::Sname.start if choice == "y"
       SnameCommands::Commands.quit_game unless choice == "y"  
     end
 
     def get_guess_history
-      puts "Guess History"
       if @user_guess_array.length > 0
         for i in (0...@user_guess_array.length) do print " #{i+1} ==> #{@user_guess_array[i]} \n" end
         print "\n"
@@ -114,7 +116,7 @@ module SnameGame
         @user_guess_count += 1 
         @user_guess_array << @user_guess 
         is_correct? 
-        puts SnameLogics::Logics.get_feedback(@user_guess,@game_colours)
+        SnameLogics::Logics.get_feedback(@user_guess,@game_colours)
       end 
     end
 
