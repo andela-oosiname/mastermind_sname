@@ -20,7 +20,6 @@ module MastermindSname
     def self.start_choice(user_choice)
       case user_choice
       when "p", "play"
-        SnameCommands::Commands.clear_screen
         SnamePlayer::Player.set_player
         SnameGame::Game.new.play
       when "q","quit" then exit

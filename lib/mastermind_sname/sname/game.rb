@@ -26,8 +26,7 @@ module SnameGame
         break if @user_guess == "cheat" || @user_guess == "quit" || @user_guess == "q" || @user_guess == "c" 
         puts record_guess
       end 
-      unless SnameLogics::Logics.is_input_command?(@user_guess)
-        SnameCommands::Commands.clear_screen    
+      unless SnameLogics::Logics.is_input_command?(@user_guess)  
         game_end 
       end
     end
@@ -44,7 +43,6 @@ module SnameGame
       system "echo '{\"beginner\":[],\"intermediate\":[],\"advanced\":[]}' > game_records.json"
       File.file?("game_records.json")
     end
-
 
     def update_player
       @player_hash["time"] = @user_guess_array
@@ -85,7 +83,7 @@ module SnameGame
       end
       until valid == true do
         valid = true if SnameLogics::Logics.is_input_command?(@user_guess)
-       #SnameCommands::Commands.command_action(@user_guess,@game_colours) 
+        puts SnameCommands::Commands.command_action(@user_guess,@game_colours) 
         valid = SnameLogics::Logics.check_guess?(@user_guess, @player_hash["level"])  if !valid
         puts  SnameLogics::Logics.check_guess_length?(@user_guess, @player_hash["level"]) if !valid
         @user_guess = gets.chomp.downcase if !valid
@@ -98,18 +96,18 @@ module SnameGame
     def play_again
       puts "Do you want to play again? (y for yes/ press any other key to quit)"
       choice = gets.chomp.downcase
-      MastermindSname::Sname.start if choice == "y"
-      SnameCommands::Commands.quit_game unless choice == "y"  
+      if choice == "y"
+        MastermindSname::Sname.start 
+      else
+        exit
+      end
     end
 
     def get_guess_history
-      if @user_guess_array.length > 0
-        for i in (0...@user_guess_array.length) do print " #{i+1} ==> #{@user_guess_array[i]} \n" end
-        print "\n"
-      else
-        puts "history is empty"
-      end
+      for i in (0...@user_guess_array.length) do print " #{i+1} ==> #{@user_guess_array[i]} \n" end
+      print "\n"
       puts "Enter guess"
+      return @user_guess_array
     end
 
     def record_guess
