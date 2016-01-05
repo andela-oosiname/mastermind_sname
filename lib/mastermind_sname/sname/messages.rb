@@ -124,7 +124,7 @@ module SnameMessages
 				\nTo quit the game at any point enter q or quit.
 				\nThe game is timed and on successful completion, the user gets a detail of his performance and a top players list is displayed"
 				puts ""
-				MastermindSname::start
+				MastermindSname::Sname.start
 		end
 	end
 end

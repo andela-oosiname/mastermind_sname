@@ -11,30 +11,28 @@ require_relative "mastermind_sname/sname/timer.rb"
 
 
 module MastermindSname
-  def self.start
-    SnameMessages::Messages.splash_screen
-    choice = get_choice
-    start_choice(choice)
-  end
-  def self.start_choice(choice)
-    case choice
-    when "p", "play"
-      SnameCommands::Commands.clear_screen
-      SnamePlayer::Player.set_player
-      SnameGame::Game.new.play
-    when "q","quit"
-      SnameCommands::Commands.quit_game
-    when "r", "read"
-      SnameMessages::Messages.get_instructions
+  class Sname
+    def self.start
+      SnameMessages::Messages.splash_screen
+      my_choice = get_choice
+      start_choice(my_choice)
+    end
+    def self.start_choice(user_choice)
+      case user_choice
+      when "p", "play"
+        SnameCommands::Commands.clear_screen
+        SnamePlayer::Player.set_player
+        SnameGame::Game.new.play
+      when "q","quit" then exit
+      when "r", "read" then  SnameMessages::Messages.get_instructions
+      end
     end
 
+    def self.get_choice
+      choice = gets.chomp.downcase
+      choice
+    end
   end
-
-  def self.get_choice
-    choice = gets.chomp.downcase
-    choice
-  end
-
 end
 
 
