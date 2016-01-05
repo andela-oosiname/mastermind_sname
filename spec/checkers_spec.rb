@@ -26,21 +26,36 @@ describe SnameLogics::Logics do
 
     describe "#check_guess_length?" do
     		let (:guess)  {"yygb"}
-    		let (:level) {"a"}
+    		let (:level) {"b"}
     		let (:guess_2) {"yybggb"}
-    		let (:level_2) {"b"}
-
+    		let (:level_2) {"i"}
+        let (:guess_3) {"yybggbgg"}
+        let (:level_3) {"a"}
 	    it 'returns guess is too short' do
-	      expect(SnameLogics::Logics.check_guess_length?(guess,level)).to eq ("guess is too short")
+	      expect(SnameLogics::Logics.check_guess_length?(guess,level_2)).to eq ("guess is too short")
 	    end
 
 	    it 'returns guess is too short' do
-	      expect(SnameLogics::Logics.check_guess_length?(guess_2,level)).to eq ("guess is too short")
+	      expect(SnameLogics::Logics.check_guess_length?(guess,level_3)).to eq ("guess is too short")
 	    end
 
 	    it 'returns guess is too long' do
-	      expect(SnameLogics::Logics.check_guess_length?(guess_2,level_2)).to eq ("guess is too long")
+	      expect(SnameLogics::Logics.check_guess_length?(guess_2,level)).to eq ("guess is too long")
 	    end
+       it 'returns guess is too short' do
+        expect(SnameLogics::Logics.check_guess_length?(guess_2,level_3)).to eq ("guess is too short")
+      end
+
+      it 'returns guess is too long' do
+        expect(SnameLogics::Logics.check_guess_length?(guess_3,level)).to eq ("guess is too long")
+      end
+
+      it 'returns guess is too long' do
+        expect(SnameLogics::Logics.check_guess_length?(guess_3,level_2)).to eq ("guess is too long")
+      end
+       it 'returns okay' do
+        expect(SnameLogics::Logics.check_guess_length?(guess_3,level_2)).to eq ("guess is too long")
+      end
   	end
 
     describe "#get_feedback" do
@@ -73,5 +88,18 @@ describe SnameLogics::Logics do
       end
 
     end
+
+  describe "#is_input_command?" do
+     
+      it "returns true" do
+        expect(SnameLogics::Logics.is_input_command?("h")).to be true
+      end
+
+      it "returns false" do
+        expect(SnameLogics::Logics.is_input_command?("rrgy")).to be false
+      end
+
+    end
+    
     
 end

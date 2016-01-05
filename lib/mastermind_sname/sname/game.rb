@@ -84,14 +84,15 @@ module SnameGame
         get_guess_history
       end
       until valid == true do
-        if SnameLogics::Logics.is_input_command?(@user_guess)
-          valid = false
-          return SnameCommands::Commands.command_action(@user_guess,@game_colours) 
-        end
+        valid = true if SnameLogics::Logics.is_input_command?(@user_guess)
+        SnameCommands::Commands.command_action(@user_guess,@game_colours) 
         valid = SnameLogics::Logics.check_guess?(@user_guess, @player_hash["level"])  if !valid
-        puts SnameLogics::Logics.check_guess_length?(@user_guess, @player_hash["level"])  if !valid
-        @user_guess = gets.chomp.downcase if !valid 
+        puts  SnameLogics::Logics.check_guess_length?(@user_guess, @player_hash["level"]) if !valid
+        @user_guess = gets.chomp.downcase if !valid
       end
+    end
+
+    def user_guess_check
     end
 
     def play_again
