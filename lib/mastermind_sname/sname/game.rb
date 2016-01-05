@@ -85,7 +85,7 @@ module SnameGame
       end
       until valid == true do
         valid = true if SnameLogics::Logics.is_input_command?(@user_guess)
-        SnameCommands::Commands.command_action(@user_guess,@game_colours) 
+       #SnameCommands::Commands.command_action(@user_guess,@game_colours) 
         valid = SnameLogics::Logics.check_guess?(@user_guess, @player_hash["level"])  if !valid
         puts  SnameLogics::Logics.check_guess_length?(@user_guess, @player_hash["level"]) if !valid
         @user_guess = gets.chomp.downcase if !valid
