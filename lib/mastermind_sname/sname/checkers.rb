@@ -13,23 +13,20 @@ module SnameLogics
       case level
         when "b"
           return "guess is too long" if guess.length > 4
-          return "guess is too short" if guess.length < 4
         when "i"
           return "guess is too long" if guess.length > 6
-          return "guess is too short" if guess.length < 6
         when "a"
           return "guess is too long" if guess.length > 8
-          return "guess is too short" if guess.length < 8
-        else
-          return "okay"
       end
+            return "guess is too short" 
+
     end
 
-    def self.check_input(guess,length)
-      @guess = guess
-      @length = length
-      check_guess_length(guess,length)
-    end
+    # def self.check_input(guess,length)
+    #   @guess = guess
+    #   @length = length
+    #   check_guess_length(guess,length)
+    # end
 
     def self.is_input_command?(guess)
       return true if guess == "cheat" || guess == "exit" || guess == "h" || guess == "c" || guess == "q"
@@ -40,6 +37,7 @@ module SnameLogics
       return true if guess.length == 4 && level == "b"
       return true if guess.length == 6 && level == "i"
       return true if guess.length == 8 && level == "a"
+      return false
     end
 
     def self.get_no_correct_elements
