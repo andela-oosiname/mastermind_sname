@@ -87,6 +87,11 @@ describe SnameLogics::Logics do
         expect(SnameLogics::Logics.check_guess?("asdfasdf","a")).to be true
       end
 
+       it "returns false " do
+        expect(SnameLogics::Logics.check_guess?("asdfasdf","b")).to be false
+      end
+
+
     end
 
   describe "#is_input_command?" do

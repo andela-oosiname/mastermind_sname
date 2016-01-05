@@ -78,12 +78,6 @@ module SnameMessages
 			puts "Thank you for playing MASTERMIND"
 		end
 
-		def self.cheat_message(colours)
-			message_border
-			puts "Cheat Mode.. Colour Code is: " << colours.join("")
-			message_border
-		end
-
 		def self.splash_screen
 			blank_space(10)
 			56.times do
