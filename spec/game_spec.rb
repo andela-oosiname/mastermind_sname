@@ -103,4 +103,29 @@ describe "SnameGame::Game" do
       expect{@game.play_again}.to raise_error SystemExit
     end
   end
+
+  describe "#game_end" do
+    before do
+      @game.user_guess_count = 12
+    end
+    it 'returns String' do
+      expect(@game.game_end).to be_a String
+    end
+  end
+
+  describe "#collect_user_guess" do
+    it 'returns String' do
+      allow(@game).to receive(:gets).and_return('h')
+      expect(@game.collect_user_guess).to be_a Array
+    end
+  end
+
 end
+
+describe "#initialize_values" do
+    it 'returns String' do
+      allow(@game).to receive(:gets).and_return('h')
+      expect(@game.initialize_values).to be_a Array
+    end
+  end
+
