@@ -120,12 +120,6 @@ describe "SnameGame::Game" do
     end
   end
 
-end
 
-describe "#initialize_values" do
-    it 'returns String' do
-      allow(@game).to receive(:gets).and_return('h')
-      expect(@game.initialize_values).to be_a Array
-    end
-  end
+end
 
