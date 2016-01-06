@@ -35,13 +35,6 @@ describe SnameMessages::Messages do
     end
   end
 
-  describe "#game_over_screen" do
-
-    it "returns a string " do
-      allow(SnameMessages::Messages).to receive(:puts).and_return('t')
-     expect(SnameMessages::Messages.game_over_screen).to be_a String
-    end
-  end
 
   describe "#body_message" do
 
@@ -61,21 +54,20 @@ describe SnameMessages::Messages do
     end
   end
 
-    describe "#self_border" do
+  describe "#border" do
 
     it "returns a string " do
-      allow(SnameMessages::Messages).to receive(:puts).and_return('t')
-     expect(SnameMessages::Messages.splash_screen).to be_a String
+      allow(SnameMessages::Messages).to receive(:print).and_return('t')
+     expect(SnameMessages::Messages.border).to be_a String
     end
   end
 
-    describe "#top_ten_head" do
+  describe "#top_ten_head" do
 
     it "returns a string " do
-      allow(SnameMessages::Messages).to receive(:puts).and_return('t')
-     expect(SnameMessages::Messages.splash_screen).to be_a String
+      allow(SnameMessages::Messages).to receive(:print).and_return('t')
+     expect(SnameMessages::Messages.top_ten_head).to be_a String
     end
   end
+
 end
-
-

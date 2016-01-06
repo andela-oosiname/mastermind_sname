@@ -27,13 +27,6 @@ module SnameMessages
 		end
 		
 
-		def self.game_over_screen
-			blank_space(22)
-			puts "GAME OVER"
-			blank_space(16)
-			puts "you are out of guesses"
-		end
-
 		def self.horizontal_stars
 			30.times do
 				print "* "

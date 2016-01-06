@@ -10,6 +10,7 @@ module SnameGame
       @player_hash = SnamePlayer::Player.get_player
       @game_colours = SnameGameColours::GameColours.get_colours(@player_hash["level"])
       create_records_file  unless File.file?("game_records.json")
+      File.file?("game_records.json")
     end
 
     def play
@@ -27,7 +28,7 @@ module SnameGame
         puts record_guess
       end 
       unless SnameLogics::Logics.is_input_command?(@user_guess)  
-        game_end 
+        puts game_end 
       end
     end
 
@@ -73,7 +74,7 @@ module SnameGame
 
     def game_end
       if  @user_guess_count > 11
-        SnameMessages::Messages.game_over_screen 
+        return "GAME OVER! Out of Guesses" 
       else
         update_player
         BuildRecord::Sname.new.set_new_record(@player_hash)
@@ -88,7 +89,7 @@ module SnameGame
       @user_guess = gets.chomp.downcase
       if @user_guess == "h"
         valid = true
-        get_guess_history
+        return get_guess_history
       end
       until valid == true do
         valid = true if SnameLogics::Logics.is_input_command?(@user_guess)
