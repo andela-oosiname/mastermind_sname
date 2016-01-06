@@ -119,7 +119,5 @@ describe "SnameGame::Game" do
       expect(@game.collect_user_guess).to be_a Array
     end
   end
-
-
 end
 
