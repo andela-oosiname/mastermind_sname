@@ -3,9 +3,9 @@ require_relative "dump_data.rb"
 module SnameGame
   class Game
     attr_accessor :level,:game_colours,:user_colours,:number_of_guesses, :user_guess, :player_hash, :user_guess_array, :user_guess_count
+    
     def initialize_values
       @user_guess_count = 0
-      @user_guess = ""
       @user_guess_array = []
       @player_hash = SnamePlayer::Player.get_player
       @game_colours = SnameGameColours::GameColours.get_colours(@player_hash["level"])
@@ -42,11 +42,8 @@ module SnameGame
 
 
     def is_correct?
-      if @user_guess == @game_colours.join("")
-        return true 
-      else
-        return false
-      end
+      return true  if @user_guess == @game_colours.join("")
+      return false
     end
 
     def create_records_file
@@ -55,7 +52,6 @@ module SnameGame
     end
 
     def update_player
-      @player_hash["time"] = @user_guess_array
       @player_hash["guesses_count"] = @user_guess_array.length
       @player_hash["full_level"] = get_full_level_name
       @player_hash["game_colours"] = @game_colours 
@@ -85,7 +81,7 @@ module SnameGame
 
     def collect_user_guess
       valid = false
-      puts "You've taken #{@user_guess_array.length} guess(es) ...." if @user_guess_array != [] && @user_guess != "h"
+      puts "You've taken #{@user_guess_array.length} guess(es)" if @user_guess_array != []
       @user_guess = gets.chomp.downcase
       if @user_guess == "h"
         valid = true

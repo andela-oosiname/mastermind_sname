@@ -20,6 +20,7 @@ module SnameLogics
 
     def self.is_input_command?(guess)
       return true if guess == "cheat" || guess == "exit" || guess == "h" || guess == "c" || guess == "q"
+      return true if guess == "quit" 
       return false
     end
 
@@ -45,6 +46,7 @@ module SnameLogics
       end 
       correct_positions
     end
+    
     def self.get_feedback(user_guess,colour_code)
       @user_guess = user_guess
       @colour_code = colour_code

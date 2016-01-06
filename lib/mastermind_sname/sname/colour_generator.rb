@@ -31,8 +31,8 @@ module SnameGameColours
 			@level = level
 			final_colour_array = []
 			initial_colour_array = set_colours(level)
-			set_length_of_colours
-			until final_colour_array.length == @code_length
+			code_length = set_length_of_colours
+			until final_colour_array.length == code_length
 				final_colour_array << initial_colour_array.sample
 			end
 			final_colour_array 	
@@ -41,11 +41,11 @@ module SnameGameColours
 		def self.set_length_of_colours
 			case @level
 			when "b"
-				@code_length = 4
+				return 4
 			when "i"
-				@code_length = 6
+				return 6
 			when "a"
-				@code_length = 8
+				return 8
 			end
 
 		end
