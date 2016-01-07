@@ -56,31 +56,14 @@ describe "MastermindSname::Game" do
     end
   end
 
-  # describe "#record_guess" do
+  describe "#play_again" do
 
-  #   it 'returns status' do
-  #     status = "rryg has 2 of the correct elements with 3 in the correct positions"
-  #     allow(@game).to receive(:puts).with(status)
-  #     expect(@game.record_guess).to be_a String
-  #   end
-  # end
+    it 'should exit' do
+      allow(@game).to receive(:gets).and_return('j')
+      expect{@game.play_again}.to raise_error SystemExit
+    end
 
-  # describe "#play_again" do
+  end
 
-  #   it 'should exit' do
-  #     allow(@game).to receive(:gets).and_return('j')
-  #     expect{@game.play_again}.to raise_error SystemExit
-  #   end
-
-  # end
-
-  # describe "#game_end" do
-  #   before do
-  #     @game.user_guesses = 12
-  #   end
-  #   it 'returns String' do
-  #     expect(@game.game_end).to be_a String
-  #   end
-  # end
 end
 
