@@ -1,36 +1,32 @@
-# require 'spec_helper'
+require 'spec_helper'
 
-# describe MastermindSname::Player do
-# 	describe "#set_player_name" do
+describe MastermindSname::Player do
 
-# 	    it "returns a string " do
-# 	      allow(MastermindSname::Player).to receive(:gets).and_return('tayo')
-# 	     expect(MastermindSname::Player.set_player_name).to eq ('Tayo')
-# 	    end
-# 	end
+  before do
+    @player = MastermindSname::Player.new
+  end
+	describe "#set_player_name" do
 
-# 	describe "#set_level" do
+	    it "returns a string " do
+	      allow(@player).to receive(:gets).and_return('tayo')
+	     expect(@player.set_player_name).to eq ('Tayo')
+	    end
+	end
 
-# 	    it "returns a string " do
-# 	      allow(MastermindSname::Player).to receive(:gets).and_return('b')
-# 	     expect(MastermindSname::Player.set_level).to eq ('b')
-# 	    end
-# 	end
+	describe "#set_level" do
 
-# 	describe "#get_player" do
+	    it "returns a string " do
+	      allow(@player).to receive(:gets).and_return('b')
+	     expect(@player.set_level).to eq ('b')
+	    end
+	end
 
-# 	    it "returns a string " do
+	describe "#set_player" do
 
-# 	     expect(MastermindSname::Player.get_player).to be_a Hash
-# 	    end
-# 	end
+	    it "returns a Hash " do
+	      allow(@player).to receive(:gets).and_return('i')
+	     expect(@player.set_player).to be_a Hash
+	    end
+	end
 
-# 	describe "#set_player" do
-
-# 	    it "returns a string " do
-# 	      allow(MastermindSname::Player).to receive(:gets).and_return('i')
-# 	     expect(MastermindSname::Player.set_player).to eq ('i')
-# 	    end
-# 	end
-
-# end
+end
