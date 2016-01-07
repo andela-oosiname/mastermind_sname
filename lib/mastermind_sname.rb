@@ -18,7 +18,7 @@ module MastermindSname
       case user_choice
       when "p", "play"
         player = Player.new.set_player
-        new_game = Game.new(player).play
+        Game.new(player).play
       when "q","quit" then exit
       when "r", "read" then  Messages.get_instructions
       end
