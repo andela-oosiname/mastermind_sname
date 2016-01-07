@@ -19,11 +19,11 @@ module MastermindSname
 			horizontal_stars
 		end
 
-		def self.start_message(player_hash,game_colours)
+		def self.start_message(player_hash, game_colours)
 			colours = "(r)ed, (g)reen, (y)ellow, (b)lue" if game_colours.length == 4
 			colours = "(r)ed, (g)reen, (y)ellow, (b)lue, (o)range" if game_colours.length == 6
 			colours = "(r)ed, (g)reen, (y)ellow, (b)lue, (o)range, (v)iolet"if game_colours.length == 8
-			puts "Hello #{player_hash[:name]} I have generated a sequence with #{game_colours.length} elements made up of a combination of any of: #{colours}... Can you guess the colour"
+			"Hello #{player_hash[:name]} I have generated a sequence with #{game_colours.length} elements made up of a combination of any of: #{colours}... Can you guess the colour"
 		end
 		
 

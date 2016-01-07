@@ -5,7 +5,7 @@ module MastermindSname
 			@player = player
 			@record = get_record
 			@new_record = @record[player[:full_level]] << {"name"=>player[:name],"game_colours" => player[:game_colours].join(""), "guesses" => player[:guesses_count], "times" => player[:time]}
-			select_level
+			update_level
 		end 
 
 		def get_record
@@ -14,7 +14,7 @@ module MastermindSname
 			return obj
 		end
 		
-		def select_level
+		def update_level
 			case @player[:level]
 			when "b"
 				update_beginner_record
