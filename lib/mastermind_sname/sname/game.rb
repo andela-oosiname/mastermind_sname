@@ -1,22 +1,22 @@
 require_relative "commands.rb"
 require_relative "dump_data.rb"
-module SnameGame
+module MastermindSname
   class Game
     attr_accessor :level,:game_colours,:user_colours,:number_of_guesses, :user_guess, :player_hash, :user_guess_array, :user_guess_count
     
     def initialize_values
       @user_guess_count = 0
       @user_guess_array = []
-      @player_hash = SnamePlayer::Player.get_player
-      @game_colours = SnameGameColours::GameColours.get_colours(@player_hash["level"])
+      @player_hash = Player.get_player
+      @game_colours = GameColours.get_colours(@player_hash[:level])
       create_records_file  unless File.file?("game_records.json")
       File.file?("game_records.json")
     end
 
     def play
       initialize_values
-      @player_hash["start_time"] = SnameTimer::Timer.set_time
-      SnameMessages::Messages.start_message(@player_hash,@game_colours)
+      @start_time = Time.now
+      Messages.start_message(@player_hash,@game_colours)
       start_guessing
       play_again 
     end
@@ -27,7 +27,7 @@ module SnameGame
         break if is_quit? 
         puts record_guess
       end 
-      unless SnameLogics::Logics.is_input_command?(@user_guess)  
+      unless Logics.is_input_command?(@user_guess)  
         puts game_end 
       end
     end
@@ -52,16 +52,16 @@ module SnameGame
     end
 
     def update_player
-      @player_hash["guesses_count"] = @user_guess_array.length
-      @player_hash["full_level"] = get_full_level_name
-      @player_hash["game_colours"] = @game_colours 
-      @player_hash["end_time"] = SnameTimer::Timer.set_time
-      @player_hash["time"] = SnameTimer::Timer.get_time_taken(@player_hash["start_time"],@player_hash["end_time"])
+      @player_hash[:guesses_count] = @user_guess_array.length
+      @player_hash[:full_level] = get_full_level_name
+      @player_hash[:game_colours] = @game_colours 
+      @time = Time.now - @start_time
+      @player_hash[:time] = @time.get_time
       @player_hash
     end
 
     def get_full_level_name
-      case @player_hash["level"]
+      case @player_hash[:level]
       when "i" then return "intermediate"
       when "b" then return "beginner"
       when "a" then   return "advanced"
@@ -73,9 +73,9 @@ module SnameGame
         return "GAME OVER! Out of Guesses" 
       else
         update_player
-        BuildRecord::Sname.new.set_new_record(@player_hash)
-        SnameMessages::Messages.congratulations_screen(@player_hash)
-        BuildRecord::Sname.new.display_top_ten(@player_hash)
+        BuildRecord.new.set_new_record(@player_hash)
+        Messages.congratulations_screen(@player_hash)
+        BuildRecord.new.display_top_ten(@player_hash)
       end
     end
 
@@ -88,10 +88,10 @@ module SnameGame
         return get_guess_history
       end
       until valid == true do
-        valid = true if SnameLogics::Logics.is_input_command?(@user_guess)
-        puts SnameCommands::Commands.command_action(@user_guess,@game_colours) 
-        valid = SnameLogics::Logics.check_guess?(@user_guess, @player_hash["level"])  if !valid
-        puts  SnameLogics::Logics.check_guess_length?(@user_guess, @player_hash["level"]) if !valid
+        valid = true if Logics.is_input_command?(@user_guess)
+        puts Commands.command_action(@user_guess,@game_colours) 
+        valid = Logics.check_guess?(@user_guess, @player_hash[:level])  if !valid
+        puts  Logics.check_guess_length?(@user_guess, @player_hash[:level]) if !valid
         @user_guess = gets.chomp.downcase if !valid
       end
     end

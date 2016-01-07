@@ -1,5 +1,5 @@
-module BuildRecord
-	class Sname
+module MastermindSname
+	class BuildRecord
 		require 'json'
 		def set_new_record(player_hash)
 			@player_hash = player_hash

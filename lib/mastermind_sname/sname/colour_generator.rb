@@ -1,4 +1,4 @@
-module SnameGameColours
+module MastermindSname
 	class GameColours
 
 		attr_accessor :beginner_colours, :intermediate_colours, :advanced_colours, :level
@@ -39,15 +39,12 @@ module SnameGameColours
 		end
 
 		def self.set_length_of_colours
+			level_hash = {}
 			case @level
-			when "b"
-				return 4
-			when "i"
-				return 6
-			when "a"
-				return 8
+			when "b" then return 4
+			when "i" then return 6
+			when "a" then return 8
 			end
-
 		end
 	end
 end
