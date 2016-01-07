@@ -1,16 +1,15 @@
  require 'spec_helper'
 
- describe SnameTimer::Timer do
-  describe "#format_time" do
+ describe "Integer" do
+  describe "#time_format" do
 
-    let (:time_interval) {2345}
-    it 'returns 39m5s' do
-      expect(SnameTimer::Timer.format_time(time_interval)).to eq ("39m5s")
+    it 'returns "2m40s"' do
+      expect(160.time_format).to eq ("2m40s")
     end
 
-    let (:time_interval_2) {145}
-    it 'returns "2m25s"' do
-      expect(SnameTimer::Timer.format_time(time_interval_2)).to eq ("2m25s")
+    it 'returns a string ' do
+      expect(160.time_format).to be_a String
     end
+
   end
 end

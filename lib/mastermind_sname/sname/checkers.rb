@@ -1,34 +1,26 @@
-module SnameLogics
+module MastermindSname
   class Logics
-    def self.is_valid_level?(level)
+    def self.valid_level?(level)
       @level = level
-      if @level == "a" || @level == "i" || @level == "b" 
-        return true
-      else
-        return false
-      end
+      valid_level = [:a, :b, :i]
+      true if valid_level.include?(@level.to_sym) 
     end
 
     def self.check_guess_length?(guess,level)
-      result = case
-        when level == "b" && guess.length > 4 then return "guess is too long"
-        when level == "i" && guess.length > 6 then return "guess is too long"
-        when level == "a" && guess.length > 8 then return "guess is too long"     
-      end
-      return "guess is too short" 
+      length = guess.length
+      return "guess is too long" if length > @guess_hash[level.to_sym]
+      "guess is too short" 
     end
 
-    def self.is_input_command?(guess)
-      return true if guess == "cheat" || guess == "exit" || guess == "h" || guess == "c" || guess == "q"
-      return true if guess == "quit" 
-      return false
+    def self.input_command?(guess)
+      commands = [:cheat, :exit, :h, :c, :q, :quit]
+      true if commands.include?(guess.to_sym) 
     end
 
     def self.check_guess?(guess,level)
-      return true if guess.length == 4 && level == "b"
-      return true if guess.length == 6 && level == "i"
-      return true if guess.length == 8 && level == "a"
-      return false
+      length = guess.length
+      @guess_hash = {b: 4, i: 6, a: 8}
+      return true if length == @guess_hash[level.to_sym]
     end
 
     def self.get_no_correct_elements

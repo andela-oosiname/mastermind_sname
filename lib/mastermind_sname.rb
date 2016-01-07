@@ -1,33 +1,29 @@
-require_relative "mastermind_sname/sname/test.rb"
-require_relative "mastermind_sname/sname/colour_generator.rb"
-require_relative "mastermind_sname/sname/game.rb"
-require_relative "mastermind_sname/sname/player_details.rb"
-require_relative "mastermind_sname/sname/messages.rb"
 require_relative "mastermind_sname/sname/checkers.rb"
+require_relative "mastermind_sname/sname/colour_generator.rb"
 require_relative "mastermind_sname/sname/commands.rb"
+require_relative "mastermind_sname/sname/game.rb"
+require_relative "mastermind_sname/sname/messages.rb"
+require_relative "mastermind_sname/sname/player_details.rb"
 require_relative "mastermind_sname/sname/timer.rb"
 
 module MastermindSname
   class Sname
+
     def self.start
-      SnameMessages::Messages.splash_screen
-      my_choice = get_choice
-      start_choice(my_choice)
+      Messages.splash_screen
+      start_choice gets.chomp.downcase
     end
+
     def self.start_choice(user_choice)
       case user_choice
       when "p", "play"
-        SnamePlayer::Player.set_player
-        SnameGame::Game.new.play
+        player = Player.new.set_player
+        Game.new(player).play
       when "q","quit" then exit
-      when "r", "read" then  SnameMessages::Messages.get_instructions
+      when "r", "read" then  Messages.get_instructions
       end
     end
 
-    def self.get_choice
-      choice = gets.chomp.downcase
-      choice
-    end
   end
 end
 

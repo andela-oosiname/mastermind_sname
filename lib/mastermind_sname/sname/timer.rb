@@ -1,26 +1,7 @@
-module SnameTimer
-  class Timer
-  
-    def self.set_time
-      time = Time.now
-      time_array = [time.hour, time.min, time.sec]
-      (time_array[0] * 3600) + (time_array[1] * 60) + time_array[2]
+class Integer
+    def time_format
+      mins = self/60
+      secs = self%60
+      "#{mins}m#{secs}s"
     end
-
-    def self.format_time(time_interval)
-      mins = 0
-      while time_interval > 59 do 
-        mins = mins + time_interval/60
-        time_interval -= (mins * 60)
-      end
-      secs = time_interval
-      return "#{secs}s" if mins == 0
-      return "#{mins}m#{secs}s"
-    end
-
-    def self.get_time_taken(start_time,end_time)
-      time_interval =   end_time.to_i - start_time.to_i
-      format_time(time_interval)
-    end
-  end
 end

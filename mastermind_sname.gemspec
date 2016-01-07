@@ -4,7 +4,7 @@ require 'mastermind_sname/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "mastermind_sname"
-  spec.version       = "1.1"
+  spec.version       = "1.0"
   spec.authors       = ["Olumuyiwa Osiname"]
   spec.email         = ["olumuyiwa.osiname@andela.com"]
 
@@ -15,7 +15,7 @@ Gem::Specification.new do |spec|
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
   spec.bindir        = "bin"
-  spec.executables   = ["mastermind_sname"]
+  spec.executables   = ["mastermind"]
   spec.require_paths = ["lib"]
 
   spec.add_development_dependency "bundler"

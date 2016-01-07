@@ -1,5 +1,5 @@
 require_relative "game.rb"
-module SnameCommands
+module MastermindSname
 	class Commands
 		def self.command_action(to_do,colours)
 			colours = colours
