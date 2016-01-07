@@ -70,4 +70,15 @@ describe MastermindSname::Messages do
     end
   end
 
+   describe "#start_message" do
+
+    let(:player_hash)  {{name: "beginner", guesses_count: 3}}
+    let(:game_colours) {["r","g","y","y"]}
+
+    it "returns a string " do
+      allow(MastermindSname::Messages).to receive(:pputs).and_return('t')
+     expect(MastermindSname::Messages.start_message(player_hash, game_colours)).to be_a String
+    end
+  end
+
 end

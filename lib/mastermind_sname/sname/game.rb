@@ -3,6 +3,8 @@ require_relative "records.rb"
 require_relative "timer.rb"
 module MastermindSname
   class Game
+
+    attr_accessor :game_colours, :user_guess, :player, :start_time
     
     def initialize(player)
       @user_guess_count = 0
@@ -15,7 +17,7 @@ module MastermindSname
 
     def play
       @start_time = Time.now
-      Messages.start_message(@player ,@game_colours)
+      puts Messages.start_message(@player ,@game_colours)
       start_guessing
       play_again 
     end
