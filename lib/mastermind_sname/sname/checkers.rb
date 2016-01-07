@@ -20,6 +20,7 @@ module MastermindSname
 
     def self.check_guess?(guess,level)
       length = guess.length
+       @guess_hash = {b: 4, i: 6, a: 8}
       return true if length == @guess_hash[level.to_sym]
     end
 

@@ -15,15 +15,13 @@ module MastermindSname
     def set_level
     		puts Messages.get_level_message
     		level = gets.chomp.downcase
-    		status = Logics.valid_level?(level)
-    		while status == false do 
+    		loop do 
+          break if Logics.valid_level?(level)
     			puts Messages.invalid_level
-    			level = gets.chomp.downcase
-    			status = Logics.valid_level?(level)
+    			level = gets.chomp.downcase		
     		end
         level
     end
-
   end
 end
 

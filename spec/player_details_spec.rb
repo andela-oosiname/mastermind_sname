@@ -19,6 +19,11 @@ describe MastermindSname::Player do
 	      allow(@player).to receive(:gets).and_return('b')
 	     expect(@player.set_level).to eq ('b')
 	    end
+
+	     it "returns a string " do
+	      allow(@player).to receive(:gets).and_return('b')
+	     expect(@player.set_level).to eq ('b')
+	    end
 	end
 
 	describe "#set_player" do
