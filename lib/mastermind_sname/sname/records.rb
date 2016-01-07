@@ -1,10 +1,10 @@
 module MastermindSname
 	class BuildRecord
 		require 'json'
-		def set_new_record(player_hash)
-			@player_hash = player_hash
+		def set_new_record(player)
+			@player = player
 			@record = get_record
-			@new_record = @record[player_hash[:full_level]] << {"name"=>player_hash[:name],"game_colours" => player_hash[:game_colours].join(""), "guesses" => player_hash[:guesses_count], "times" => player_hash[:time]}
+			@new_record = @record[player[:full_level]] << {"name"=>player[:name],"game_colours" => player[:game_colours].join(""), "guesses" => player[:guesses_count], "times" => player[:time]}
 			select_level
 		end 
 
@@ -15,7 +15,7 @@ module MastermindSname
 		end
 		
 		def select_level
-			case @player_hash[:level]
+			case @player[:level]
 			when "b"
 				update_beginner_record
 			when "i"
@@ -58,9 +58,9 @@ module MastermindSname
 			end
 		end
 
-		def display_top_ten(player_hash)
+		def display_top_ten(player)
 			Messages.top_ten_head
-			level = player_hash["full_level"]
+			level = player[:full_level]
 			record = get_record
 			level_record = record[level].sort_by { |hsh| hsh["guesses"] }
 			n = 0
@@ -71,6 +71,6 @@ module MastermindSname
 				break if n == 10
 			end
 		end
-		
+
 	end
 end

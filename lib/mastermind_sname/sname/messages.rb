@@ -45,11 +45,11 @@ module MastermindSname
 
 		def self.body_message(player_hash)
 			blank_space(10)
-			puts "CONGRATULATIONS!! You got the sequence '#{player_hash["game_colours"].join("")}'"
+			puts "CONGRATULATIONS!! You got the sequence '#{player_hash[:game_colours].join("")}'"
 			blank_space(10)
-			puts "LEVEL: #{player_hash["full_level"]}"
+			puts "LEVEL: #{player_hash[:full_level]}"
 			blank_space(10)
-			puts "GUESSES: #{player_hash["guesses_count"]}"
+			puts "GUESSES: #{player_hash[:guesses_count]}"
 		end
 
 		def self.blank_space(n)
@@ -111,7 +111,7 @@ module MastermindSname
 				\nTo quit the game at any point enter q or quit.
 				\nThe game is timed and on successful completion, the user gets a detail of his performance and a top players list is displayed"
 				puts ""
-				MastermindSname::Sname.start
+			Sname.start
 		end
 	end
 end

@@ -8,25 +8,22 @@ require_relative "mastermind_sname/sname/timer.rb"
 
 module MastermindSname
   class Sname
+
     def self.start
       Messages.splash_screen
-      my_choice = get_choice
-      start_choice(my_choice)
+      start_choice gets.chomp.downcase
     end
+
     def self.start_choice(user_choice)
       case user_choice
       when "p", "play"
-        Player.set_player
-        Game.new.play
+        player = Player.new.set_player
+        Game.new(player).play
       when "q","quit" then exit
       when "r", "read" then  Messages.get_instructions
       end
     end
 
-    def self.get_choice
-      choice = gets.chomp.downcase
-      choice
-    end
   end
 end
 

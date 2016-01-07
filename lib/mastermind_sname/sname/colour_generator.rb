@@ -1,4 +1,5 @@
 module MastermindSname
+	
 	class GameColours
 
 		attr_accessor :beginner_colours, :intermediate_colours, :advanced_colours, :level
@@ -14,7 +15,6 @@ module MastermindSname
 		def self.advanced_colours
 			intermediate_colours << "v"
 		end
-
 
 		def self.set_colours(level)
 			case level
@@ -39,7 +39,6 @@ module MastermindSname
 		end
 
 		def self.set_length_of_colours
-			level_hash = {}
 			case @level
 			when "b" then return 4
 			when "i" then return 6
