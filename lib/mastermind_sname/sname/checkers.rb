@@ -1,8 +1,8 @@
 module MastermindSname
   class Logics
-    def self.is_valid_level?(level)
+    def self.valid_level?(level)
       @level = level
-      valid_level = [:a, :b. :i]
+      valid_level = [:a, :b, :i]
       true if valid_level.include?(@level.to_sym) 
     end
 
@@ -12,7 +12,7 @@ module MastermindSname
       "guess is too short" 
     end
 
-    def self.is_input_command?(guess)
+    def self.input_command?(guess)
       commands = [:cheat, :exit, :h, :c, :q, :quit]
       true if commands.include?(guess.to_sym) 
     end

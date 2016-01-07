@@ -1,16 +1,16 @@
 require_relative "commands.rb"
-require_relative "dump_data.rb"
+require_relative "records.rb"
+require_relative "timer.rb"
 module MastermindSname
   class Game
-    attr_accessor :level,:game_colours,:user_colours,:number_of_guesses, :user_guess, :player_hash, :user_guess_array, :user_guess_count
     
     def initialize_values
       @user_guess_count = 0
       @user_guess_array = []
       @player_hash = Player.get_player
       @game_colours = GameColours.get_colours(@player_hash[:level])
+      puts "#{@game_colours}"
       create_records_file  unless File.file?("game_records.json")
-      File.file?("game_records.json")
     end
 
     def play
@@ -22,33 +22,27 @@ module MastermindSname
     end
 
     def start_guessing
-      while @user_guess_count <= 11 && !is_correct? do
+      while @user_guess_count <= 11 && !correct? do
         collect_user_guess
-        break if is_quit? 
+        break if quit? 
         puts record_guess
       end 
-      unless Logics.is_input_command?(@user_guess)  
+      unless Logics.input_command?(@user_guess)  
         puts game_end 
       end
     end
 
-    def is_quit?
+    def quit?
       arr = ["cheat","quit","q","c"]
-      arr.each do |x|
-        return true if @user_guess == x
-      end
-        return false
+      true if arr.include?(@user_guess)
     end
 
-
-    def is_correct?
+    def correct?
       return true  if @user_guess == @game_colours.join("")
-      return false
     end
 
     def create_records_file
       system "echo '{\"beginner\":[],\"intermediate\":[],\"advanced\":[]}' > game_records.json"
-      File.file?("game_records.json")
     end
 
     def update_player
@@ -56,7 +50,7 @@ module MastermindSname
       @player_hash[:full_level] = get_full_level_name
       @player_hash[:game_colours] = @game_colours 
       @time = Time.now - @start_time
-      @player_hash[:time] = @time.get_time
+      @player_hash[:time] = @time.round.time_format
       @player_hash
     end
 
@@ -74,8 +68,8 @@ module MastermindSname
       else
         update_player
         BuildRecord.new.set_new_record(@player_hash)
-        Messages.congratulations_screen(@player_hash)
-        BuildRecord.new.display_top_ten(@player_hash)
+        # Messages.congratulations_screen(@player_hash)
+        # BuildRecord.new.display_top_ten(@player_hash)
       end
     end
 
@@ -88,22 +82,19 @@ module MastermindSname
         return get_guess_history
       end
       until valid == true do
-        valid = true if Logics.is_input_command?(@user_guess)
-        puts Commands.command_action(@user_guess,@game_colours) 
+        valid = true if Logics.input_command?(@user_guess)
+        puts Commands.command_action(@user_guess,@game_colours)
         valid = Logics.check_guess?(@user_guess, @player_hash[:level])  if !valid
         puts  Logics.check_guess_length?(@user_guess, @player_hash[:level]) if !valid
         @user_guess = gets.chomp.downcase if !valid
       end
     end
 
-    def user_guess_check
-    end
-
     def play_again
       puts "Do you want to play again? (y for yes/ press any other key to quit)"
       choice = gets.chomp.downcase
       if choice == "y"
-        MastermindSname::Sname.start 
+        Sname.start 
       else
         exit
       end
@@ -113,15 +104,14 @@ module MastermindSname
       for i in (0...@user_guess_array.length) do print " #{i+1} ==> #{@user_guess_array[i]} \n" end
       print "\n"
       puts "Enter guess"
-      return @user_guess_array
     end
 
     def record_guess
       if @user_guess != "h"
         @user_guess_count += 1 
         @user_guess_array << @user_guess 
-        is_correct? 
-        SnameLogics::Logics.get_feedback(@user_guess,@game_colours)
+        correct? 
+        Logics.get_feedback(@user_guess,@game_colours)
       end 
     end
 

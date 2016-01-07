@@ -1,4 +1,4 @@
-module SnameMessages
+module MastermindSname
 	class Messages
 		def self.invalid_level
 			puts "Please enter a valid level, 'b' for Beginner, 'i' for Intermediate, 'a' for Advanced"
@@ -20,10 +20,10 @@ module SnameMessages
 		end
 
 		def self.start_message(player_hash,game_colours)
-			colours = SnameGameColours::GameColours.beginner_colours.join("") if game_colours.length == 4
-			colours = SnameGameColours::GameColours.intermediate_colours.join("") if game_colours.length == 6
-			colours = SnameGameColours::GameColours.advanced_colours.join("") if game_colours.length == 8
-			puts "Hello #{player_hash["name"]} I have generated a sequence with #{game_colours.length} elements made up of a combination of any of: #{colours}... Can you guess the colour"
+			colours = "(r)ed, (g)reen, (y)ellow, (b)lue" if game_colours.length == 4
+			colours = "(r)ed, (g)reen, (y)ellow, (b)lue, (o)range" if game_colours.length == 6
+			colours = "(r)ed, (g)reen, (y)ellow, (b)lue, (o)range, (v)iolet"if game_colours.length == 8
+			puts "Hello #{player_hash[:name]} I have generated a sequence with #{game_colours.length} elements made up of a combination of any of: #{colours}... Can you guess the colour"
 		end
 		
 

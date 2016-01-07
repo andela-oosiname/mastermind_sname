@@ -1,9 +1,7 @@
-module MastermindSname
-  class Integer
-    def self.get_time
+class Integer
+    def time_format
       mins = self/60
       secs = self%60
       "#{mins}m#{secs}s"
     end
-  end
 end

@@ -16,17 +16,17 @@ module MastermindSname
     def self.set_level
     		puts Messages.get_level_message
     		level = gets.chomp.downcase
-    		status = Logics.is_valid_level?(level)
+    		status = Logics.valid_level?(level)
     		while status == false do 
     			puts Messages.invalid_level
     			level = gets.chomp.downcase
-    			status = Logics.is_valid_level?(level)
+    			status = Logics.valid_level?(level)
     		end
     		@level = level
     end
 
     def self.get_player
-    		{name: @name, level: => @level}
+    		{name: @name, level: @level}
     end
   end
 end
