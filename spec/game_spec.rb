@@ -57,13 +57,25 @@ describe "MastermindSname::Game" do
   end
 
   describe "#play_again" do
-
     it 'should exit' do
       allow(@game).to receive(:gets).and_return('j')
       expect{@game.play_again}.to raise_error SystemExit
     end
+  end
 
+  describe "#create_records_file" do
+    it 'should create_records_file' do
+      allow(@game).to receive("system").with("echo '{\"beginner\":[],\"intermediate\":[],\"advanced\":[]}' > game_records.json")
+      @game.create_records_file
+    end
+  end
+
+  describe "#call sname.start" do
+    it 'should exit' do
+      allow(@game).to receive(:gets).and_return('yhhh')
+      expect(@game).to receive(:play_again)
+      @game.play
+    end
   end
 
 end
-
