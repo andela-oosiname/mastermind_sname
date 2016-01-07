@@ -56,26 +56,12 @@ describe "MastermindSname::Game" do
     end
   end
 
-  describe "#record_guess" do
+  # describe "#record_guess" do
 
-    it 'returns status' do
-      status = "rryg has 2 of the correct elements with 3 in the correct positions"
-      allow(@game).to receive(:puts).with(status)
-      expect(@game.record_guess).to be_a String
-    end
-  end
-
-  # describe "#create_records_file" do
-
-  #   it 'creates json file' do
-  #     expect(@game.create_records_file).to eq(true)
-  #   end
-  # end
-
-  # describe "#get_guess_history" do
-
-  #   it 'returns an array of guesses' do
-  #     expect(@game.get_guess_history).to be_a Array
+  #   it 'returns status' do
+  #     status = "rryg has 2 of the correct elements with 3 in the correct positions"
+  #     allow(@game).to receive(:puts).with(status)
+  #     expect(@game.record_guess).to be_a String
   #   end
   # end
 
@@ -86,25 +72,14 @@ describe "MastermindSname::Game" do
   #     expect{@game.play_again}.to raise_error SystemExit
   #   end
 
-  #   it 'should exit' do
-  #     allow(@game).to receive(:gets).and_return('j')
-  #     expect{@game.play_again}.to raise_error SystemExit
-  #   end
   # end
 
   # describe "#game_end" do
   #   before do
-  #     @game.user_guess_count = 12
+  #     @game.user_guesses = 12
   #   end
   #   it 'returns String' do
   #     expect(@game.game_end).to be_a String
-  #   end
-  # end
-
-  # describe "#collect_user_guess" do
-  #   it 'returns String' do
-  #     allow(@game).to receive(:gets).and_return('h')
-  #     expect(@game.collect_user_guess).to be_a Array
   #   end
   # end
 end
