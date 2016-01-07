@@ -4,7 +4,7 @@ require_relative "timer.rb"
 module MastermindSname
   class Game
 
-    attr_accessor :game_colours, :user_guess, :player, :start_time
+    attr_accessor :game_colours, :user_guess, :player, :start_time, :user_guesses
     
     def initialize(player)
       @user_guess_count = 0
