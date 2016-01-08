@@ -1,5 +1,3 @@
-source 'https://rubygems.org'
-
-# Specify your gem's dependencies in mastermind_sname.gemspec
+source "https://rubygems.org"
 gemspec
 gem "codeclimate-test-reporter", group: :test
