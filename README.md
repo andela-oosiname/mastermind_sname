@@ -5,6 +5,12 @@
 
 Welcome to Mastermind by sname. An interactive gem packaged and played in a ruby environment. 
 
+##About Mastermind
+
+Mastermind or Master Mind is a code-breaking game. The modern game with pegs was invented in 1970 by Mordecai Meirowitz, an Israeli postmaster and telecommunications expert. It resembles an earlier pencil and paper game called Bulls and Cows that may date back a century or more.
+
+The player decides in advance how many games they will play, which must be an even number. The computer is the codemaker, the player is the codebreaker. The codemaker chooses a pattern of colours. Duplicates are allowed. The codebreaker tries to figure out the pattern with a limited number of guesses.
+
 ## Installation
 
 The User should have ruby set on his pc
@@ -23,7 +29,7 @@ Or install it yourself as:
 
     $ gem install mastermind_sname
 
-## Usage
+## Game Play
 
 A splash screen is showed once a game is started from where the user can start a game or read instructions.
 
