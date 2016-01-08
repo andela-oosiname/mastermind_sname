@@ -27,13 +27,13 @@ module MastermindSname
 
     def self.get_colours(level)
       @level = level
-      final_colour_array = []
-      initial_colour_array = set_colours(level)
+      final_colour = []
+      initial_colour = set_colours(level)
       code_length = set_length_of_colours
-      until final_colour_array.length == code_length
-        final_colour_array << initial_colour_array.sample
+      until final_colour.length == code_length
+        final_colour << initial_colour.sample
       end
-      final_colour_array
+      final_colour
     end
 
     def self.set_length_of_colours
