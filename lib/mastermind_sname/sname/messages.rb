@@ -122,5 +122,9 @@ module MastermindSname
       puts ""
       Sname.start
     end
+
+    def self.play_again_message
+      puts "Do you want to play again? (y for yes/ press any other key to quit)"
+    end
   end
 end
