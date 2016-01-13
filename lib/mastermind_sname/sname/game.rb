@@ -12,6 +12,7 @@ module MastermindSname
       @game_colours = GameColours.get_colours(@player[:level])
       puts "#{@game_colours}"
       create_records_file unless File.file?("game_records.json")
+      @add_record = BuildRecord.new
     end
 
     def play
@@ -66,9 +67,9 @@ module MastermindSname
     def game_end
       if correct?
         update_player
-        BuildRecord.new.set_new_record @player
+        @add_record.set_new_record @player
         Messages.congratulations_screen @player
-        BuildRecord.new.display_top_ten @player
+        @add_record.display_top_ten @player
       else
         "GAME OVER! Out of Guesses"
       end
@@ -94,7 +95,7 @@ module MastermindSname
     end
 
     def play_again
-      puts "Do you want to play again? (y for yes/ press any other key to quit)"
+      Messages.play_again_message
       choice = gets.chomp.downcase
       if choice == "y"
         Sname.start
