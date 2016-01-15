@@ -1,78 +1,78 @@
-require "spec_helper"
-describe "MastermindSname::Game" do
-  before   do
-    player = { name: "Muyiwa", level: "b" }
-    @game = MastermindSname::Game.new(player)
-    @game.guess = "rryg"
-    @game.game_colours = %w(r r y y)
-    @user_guess_count = 0
-    @user_guesses = []
-  end
-  describe "#correct?" do
-    it "returns false" do
-      expect(@game.correct?).to eq(nil)
-    end
-  end
+# require "spec_helper"
+# describe "MastermindSname::Game" do
+#   before   do
+#     player = { name: "Muyiwa", level: "b" }
+#     @game = MastermindSname::Game.new(player)
+#     @game.guess = "rryg"
+#     @game.game_colours = %w(r r y y)
+#     @user_guess_count = 0
+#     @user_guesses = []
+#   end
+#   describe "#correct?" do
+#     it "returns false" do
+#       expect(@game.correct?).to eq(nil)
+#     end
+#   end
 
-  describe "#correct?" do
-    before do
-      @game.guess = "rryy"
-    end
-    it "returns true" do
-      expect(@game.correct?).to eq(true)
-    end
-  end
+#   describe "#correct?" do
+#     before do
+#       @game.guess = "rryy"
+#     end
+#     it "returns true" do
+#       expect(@game.correct?).to eq(true)
+#     end
+#   end
 
-  describe "#get_full_level_name" do
-    before do
-      @game.player = { level: "b" }
-    end
-    it "returns beginner" do
-      expect(@game.get_full_level_name).to eq("beginner")
-    end
-  end
-  describe "#get_full_level_name" do
-    before do
-      @game.player = { level: "i" }
-    end
-    it "returns intermediate" do
-      expect(@game.get_full_level_name).to eq("intermediate")
-    end
-  end
+#   describe "#get_full_level_name" do
+#     before do
+#       @game.player = { level: "b" }
+#     end
+#     it "returns beginner" do
+#       expect(@game.get_full_level_name).to eq("beginner")
+#     end
+#   end
+#   describe "#get_full_level_name" do
+#     before do
+#       @game.player = { level: "i" }
+#     end
+#     it "returns intermediate" do
+#       expect(@game.get_full_level_name).to eq("intermediate")
+#     end
+#   end
 
-  describe "#get_full_level_name" do
-    before do
-      @game.player = { level: "a" }
-    end
+#   describe "#get_full_level_name" do
+#     before do
+#       @game.player = { level: "a" }
+#     end
 
-    it "returns advanced" do
-      expect(@game.get_full_level_name).to eq("advanced")
-    end
-  end
+#     it "returns advanced" do
+#       expect(@game.get_full_level_name).to eq("advanced")
+#     end
+#   end
 
-  describe "#play_again" do
-    it "should exit" do
-      allow(@game).to receive(:gets).and_return("j")
-      expect { @game.play_again }.to raise_error SystemExit
-    end
-  end
+#   describe "#play_again" do
+#     it "should exit" do
+#       allow(@game).to receive(:gets).and_return("j")
+#       expect { @game.play_again }.to raise_error SystemExit
+#     end
+#   end
 
-  describe "#create_records_file" do
-    let(:echo_msg) do
-      "echo '{\"beginner\":[],\"intermediate\":[],\"advanced\":[\]}' > g"\
-      "ame_records.json"
-    end
-    it "should create_records_file" do
-      allow(@game).to receive("system").with(echo_msg)
-      @game.create_records_file
-    end
-  end
+#   describe "#create_records_file" do
+#     let(:echo_msg) do
+#       "echo '{\"beginner\":[],\"intermediate\":[],\"advanced\":[\]}' > g"\
+#       "ame_records.json"
+#     end
+#     it "should create_records_file" do
+#       allow(@game).to receive("system").with(echo_msg)
+#       @game.create_records_file
+#     end
+#   end
 
-  describe "#call sname.start" do
-    it "should exit" do
-      allow(@game).to receive(:gets).and_return("yhhh")
-      expect(@game).to receive(:play_again)
-      @game.play
-    end
-  end
-end
+#   describe "#call sname.start" do
+#     it "should exit" do
+#       allow(@game).to receive(:gets).and_return("yhhh")
+#       expect(@game).to receive(:play_again)
+#       @game.play
+#     end
+#   end
+# end
