@@ -17,7 +17,7 @@ describe "MastermindSname::Commands" do
       to raise_error SystemExit
     end
     it "exits the game" do
-      expect{ @command.action("c", @command.game_colours, @command.guesses) }.\
+      expect{ @command.action("q", @command.game_colours, @command.guesses) }.\
       to raise_error SystemExit
     end
   end
