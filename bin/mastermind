@@ -1,2 +1,4 @@
 require 'mastermind_sname'
-MastermindSname::Sname.start
+new_game = MastermindSname::Sname.new
+new_game.start
+

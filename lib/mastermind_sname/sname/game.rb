@@ -1,23 +1,22 @@
-require_relative "commands.rb"
-require_relative "records.rb"
-require_relative "timer.rb"
+require_relative "record.rb"
+require_relative "input.rb"
 module MastermindSname
   class Game
+    include Input
     attr_accessor :game_colours, :guess, :player,
                   :start_time, :user_guesses
     def initialize(player)
-      @user_guess_count = 0
-      @user_guesses = []
+      @guesses = []
       @player = player
-      @game_colours = GameColours.get_colours(@player[:level])
+      @game_colours = GameColour.new(@player).get_colours
       puts "#{@game_colours}"
       create_records_file unless File.file?("game_records.json")
-      @add_record = BuildRecord.new
+      @message = Message.new
     end
 
     def play
       @start_time = Time.now
-      puts Messages.start_message(@player, @game_colours)
+      puts @message.start(@player, @game_colours)
       start_guessing
       play_again
     end
@@ -25,18 +24,10 @@ module MastermindSname
     def start_guessing
       loop do
         collect_user_guess
-        exit if quit?
         puts record_guess
-        break if @user_guess_count > 10 || correct?
+        break if @guesses.length > 9 || correct?
       end
-      unless Logics.input_command?(@guess)
-        puts game_end
-      end
-    end
-
-    def quit?
-      arr = %w(cheat quit q c)
-      true if arr.include?(@guess)
+      puts game_end
     end
 
     def correct?
@@ -49,74 +40,51 @@ module MastermindSname
     end
 
     def update_player
-      @player[:guesses_count] = @user_guesses.length
-      @player[:full_level] = get_full_level_name
+      @player[:guesses_count] = @guesses.length
       @player[:game_colours] = @game_colours
-      @time = Time.now - @start_time
-      @player[:time] = @time.round.time_format
-    end
-
-    def get_full_level_name
-      case @player[:level]
-      when "i" then return "intermediate"
-      when "b" then return "beginner"
-      when "a" then return "advanced"
-      end
+      @player[:time] = (Time.now - @start_time).round.time_format
     end
 
     def game_end
       if correct?
         update_player
-        @add_record.set_new_record @player
-        Messages.congratulations_screen @player
-        @add_record.display_top_ten @player
+        record = Record.new(@player)
+        record.set_new
+        @message.congratulations_screen @player
+        record.display_top_ten
       else
-        "GAME OVER! Out of Guesses"
+        @message.game_over
       end
     end
 
     def collect_user_guess
-      valid = false
-      puts "#{10 - @user_guesses.length} guess(es) left" if @user_guesses != []
-      @guess = gets.chomp.downcase
-      if @guess == "h"
-        valid = true
-        return get_guess_history
-      end
+      puts "#{10 - @guesses.length} guess(es) left" unless @guesses.empty?
+      @guess = get_input
       loop do
+        @game_logic = GameLogic.new(@guess, @game_colours)
+        valid = @game_logic.valid_length? || @game_logic.input_command?
+        Command.new.action(@guess, @game_colours, @guesses)
+        puts @game_logic.length_feedback unless valid
+        @guess = get_input unless valid
         break if valid
-        valid = true if Logics.input_command?(@guess)
-        puts Commands.command_action(@guess, @game_colours)
-        valid = Logics.check_guess?(@guess, @player[:level]) unless valid
-        puts Logics.
-          check_guess_length?(@guess, @player[:level]) unless valid
-        @guess = gets.chomp.downcase unless valid
       end
     end
 
     def play_again
-      Messages.play_again_message
-      choice = gets.chomp.downcase
+      @message.play_again
+      choice = get_input
       if choice == "y"
-        Sname.start
+        Game.new(@player).play
       else
         exit
       end
     end
 
-    def get_guess_history
-      @user_guesses.each\
-       { print " #{i + 1} ==> #{@user_guesses[i]} \n" }
-      print "\n"
-      puts "Enter guess"
-    end
-
     def record_guess
-      if @guess != "h"
-        @user_guess_count += 1
-        @user_guesses << @guess
+      unless @guess == "h"
+        @guesses << @guess
         correct?
-        Logics.get_feedback(@guess, @game_colours)
+        @game_logic.get_feedback
       end
     end
   end
