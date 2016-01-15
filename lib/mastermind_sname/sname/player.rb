@@ -32,7 +32,7 @@ module MastermindSname
       case @level
       when "i" then "intermediate"
       when "b" then "beginner"
-      when "a" then  "advanced"
+      when "a" then "advanced"
       end
     end
 
