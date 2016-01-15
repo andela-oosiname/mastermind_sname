@@ -1,111 +1,71 @@
-# require "spec_helper"
+require "spec_helper"
 
-# describe @logic do
-#   before do
-#     @logic = MastermindSname::Logics
-#   end
-#   describe "#valid_level?" do
-#     it "returns true" do
-#       expect(@logic.valid_level?("b")).to be true
-#     end
+describe "MastermindSname::Logic" do
+  before do
+    @logic = MastermindSname::GameLogic.new("rrgy", %w(r g r y))
+    @logic_2 = MastermindSname::GameLogic.new("rrgyy", %w(r g r y))
+  end
 
-#     it "returns true" do
-#       expect(@logic.valid_level?("i")).to be true
-#     end
+  describe "#length_feedback" do
+    it "returns guess is too short" do
+      expect(@logic.length_feedback).to eq("guess is too short")
+    end
+    it "returns guess is too long" do
+      expect(@logic_2.length_feedback).to eq("guess is too long")
+    end
+  end
+  describe "#input_command?" do
+    before do
+      @logic = MastermindSname::GameLogic.new("rrgy", %w(r g r y))
+      @logic_2 = MastermindSname::GameLogic.new("c", %w(r g r y))
+    end
 
-#     it "returns true" do
-#       expect(@logic.valid_level?("a")).to be true
-#     end
+    it "returns true" do
+      expect(@logic_2.input_command?).to be true
+    end
 
-#     it "returns false" do
-#       expect(@logic.valid_level?("q")).to eq nil
-#     end
+    it "returns false" do
+      expect(@logic.input_command?).to be nil
+    end
+  end
 
-#     it "returns false" do
-#       expect(@logic.valid_level?("1")).to eq nil
-#     end
-#   end
-#   describe "#check_guess_length?" do
-#     let(:guess) { "yygb" }
-#     let(:level) { "b" }
-#     let(:guess_2) { "yybggb" }
-#     let(:level_2) { "i" }
-#     let(:guess_3) { "yybggbgg" }
-#     let(:level_3) { "a" }
-#     it "returns guess is too short" do
-#       expect(@logic.check_guess_length?(guess, level_2)).
-#         to eq("guess is too short")
-#     end
-#     it "returns guess is too short" do
-#       expect(@logic.check_guess_length?(guess, level_3)).
-#         to eq("guess is too short")
-#     end
-#     it "returns guess is too long" do
-#       expect(@logic.check_guess_length?(guess_2, level)).
-#         to eq("guess is too long")
-#     end
-#     it "returns guess is too short" do
-#       expect(@logic.check_guess_length?(guess_2, level_3)).
-#         to eq("guess is too short")
-#     end
-#     it "returns guess is too long" do
-#       expect(@logic.check_guess_length?(guess_3, level)).
-#         to eq("guess is too long")
-#     end
-#     it "returns guess is too long" do
-#       expect(@logic.check_guess_length?(guess_3, level_2)).
-#         to eq("guess is too long")
-#     end
-#     it "returns okay" do
-#       expect(@logic.check_guess_length?(guess_3, level_2)).\
-#         to eq("guess is too long")
-#     end
-#   end
+  describe "#valid_length?" do
+    it "returns false" do
+      expect(@logic_2.valid_length?).to be false
+    end
 
-#   describe "#get_feedback" do
-#     let(:guess) { "yygb" }
-#     let(:code) { "byrr" }
-#     let(:guess_2) { "bggyyb" }
-#     let(:code_2) { "rrgbyy" }
+    it "returns true" do
+      expect(@logic.valid_length?).to be true
+    end
+  end
 
-#     it "returns byrr"\
-#     " has 2 of the correct elements with 1 in the correct positions" do
-#       expect(@logic.get_feedback(guess, code.split(""))).to eq("yygb"\
-#       " has 2 of the correct elements with 1 in the correct positions")
-#     end
+  describe "#get_no_correct_elements" do
+    before do
+      @logic = MastermindSname::GameLogic.new("rrgy", %w(r g r y))
+      @logic_2 = MastermindSname::GameLogic.new("rrgg", %w(r g r y))
+    end
+    it "returns 2" do
+      expect(@logic_2.get_no_correct_elements).to eq(2)
+    end
 
-#     it "returns bggyyb"\
-#     " has 4 of the correct elements with 2 in the correct positions" do
-#       expect(@logic.get_feedback(guess_2, code_2.split(""))).to eq("b"\
-#         "ggyyb has 4 of the correct elements with 2 in the correct positions")
-#     end
-#   end
+    it "returns 4" do
+      expect(@logic.get_no_correct_elements).to eq(4)
+    end
+  end
 
-#   describe "#check_guess?" do
-#     it "returns true " do
-#       expect(@logic.check_guess?("asdf", "b")).to be true
-#     end
+  describe "#get_no_correct_positions" do
+    before do
+      @logic = MastermindSname::GameLogic.new("rrgy", %w(r g r y))
+      @logic_2 = MastermindSname::GameLogic.new("rggg", %w(r g r y))
+    end
+    it "returns 2" do
+      expect(@logic_2.get_no_correct_positions).to eq(2)
+    end
 
-#     it "returns true " do
-#       expect(@logic.check_guess?("asdfsd", "i")).to be true
-#     end
+    it "returns 2" do
+      expect(@logic.get_no_correct_positions).to eq(2)
+    end
+  end
 
-#     it "returns true " do
-#       expect(@logic.check_guess?("asdfasdf", "a")).to be true
-#     end
+end
 
-#     it "returns false " do
-#       expect(@logic.check_guess?("asdfasdf", "b")).to be nil
-#     end
-#   end
-
-#   describe "#input_command?" do
-#     it "returns true" do
-#       expect(@logic.input_command? "h").to be true
-#     end
-
-#     it "returns false" do
-#       expect(@logic.input_command?("rrgy")).to be nil
-#     end
-#   end
-# end
