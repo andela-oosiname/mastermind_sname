@@ -31,7 +31,7 @@ module MastermindSname
     end
 
     def correct?
-      return true  if @guess == @game_colours.join("")
+      @guess == @game_colours.join("")
     end
 
     def create_records_file
