@@ -6,10 +6,11 @@ describe "MastermindSname::Game" do
     @game.guess = "rryg"
     @game.game_colours = %w(r r y y)
     @guesses = []
+    @game.start_time = Time.now
   end
   describe "#correct?" do
-    it "returns falsey" do
-      expect(@game.correct?).to eq(nil)
+    it "returns false" do
+      expect(@game.correct?).to eq(false)
     end
   end
 
@@ -37,20 +38,6 @@ describe "MastermindSname::Game" do
     it "should create_records_file" do
       allow(@game).to receive("system").with(echo_msg)
       @game.create_records_file
-    end
-  end
-
-  describe "#call sname.start" do
-    it "should call #play_again" do
-      allow(@game).to receive(:gets).and_return("yhhh")
-      expect(@game).to receive(:play_again)
-      @game.play
-    end
-  end
-
-  describe "#record_guess" do
-    it "returns a string" do
-      expect(@game.record_guess).to be_a String
     end
   end
 
