@@ -1,69 +1,52 @@
-# require "spec_helper"
-# describe MastermindSname::Messages do
-#   describe "#invalid_level" do
-#     it "returns a string " do
-#       allow(MastermindSname::Messages).to receive(:puts).and_return("t")
-#       expect(MastermindSname::Messages.invalid_level).to be_a String
-#     end
-#   end
-#   describe "#invalid_code" do
-#     it "returns a string " do
-#       allow(MastermindSname::Messages).to receive(:puts).and_return("t")
-#       expect(MastermindSname::Messages.invalid_code).to be_a String
-#     end
-#   end
+require "spec_helper"
+describe "MastermindSname::Message" do
+  before do
+    @message = MastermindSname::Message.new
+  end
+  describe "#invalid_level" do
+    it "returns a string " do
+      expect(STDOUT).to receive(:puts).with("Enter valid level,"\
+       " \"b\" for Beginner, \"i\" for Intermediate, \"a\" for Advanced")
+      @message.invalid_level
+    end
+  end
 
-#   describe "#get_level_message" do
-#     it "returns a string " do
-#       allow(MastermindSname::Messages).to receive(:puts).and_return("t")
-#       expect(MastermindSname::Messages.get_level_message).to be_a String
-#     end
-#   end
+  describe "#get_level_message" do
+    it "returns a string " do
+      expect(STDOUT).to receive(:puts).with("Select your level:"\
+        " (b)eginner, (i)ntermediate, (a)dvanced")
+      @message.get_level_message
+    end
+  end
 
-#   describe "#goodbye_message" do
-#     it "returns a string " do
-#       allow(MastermindSname::Messages).to receive(:puts).and_return("t")
-#       expect(MastermindSname::Messages.goodbye_message).to be_a String
-#     end
-#   end
-#   describe "#body_message" do
-#     let(:player_hash) do
-#       { game_colours: %w(r g y y), full_level: \
-#         "beginner", guesses_count: 3 }
-#     end
-#     it "returns a string " do
-#       allow(MastermindSname::Messages).to receive(:puts).and_return("t")
-#       expect(MastermindSname::Messages.body_message(player_hash)).to be_a String
-#     end
-#   end
-#   describe "#splash_screen" do
-#     it "returns a string " do
-#       allow(MastermindSname::Messages).to receive(:puts).and_return("t")
-#       expect(MastermindSname::Messages.splash_screen).to be_a String
-#     end
-#   end
+  describe "#goodbye_message" do
+    it "returns a string " do
+      expect(STDOUT).to receive(:puts).with("Thank you for playing MASTERMIND")
+      @message.goodbye_message
+    end
+  end
 
-#   describe "#border" do
-#     it "returns a string " do
-#       allow(MastermindSname::Messages).to receive(:print).and_return("t")
-#       expect(MastermindSname::Messages.border).to be_a String
-#     end
-#   end
+  describe "#cheat" do
+    let(:game_colours) { %w(r r y g) }
+    it "returns a string " do
+      expect(@message.cheat(game_colours)).to eq("The"\
+        " sequence is #{game_colours.join}")
+    end
+  end
 
-#   describe "#top_ten_head" do
-#     it "returns a string " do
-#       allow(MastermindSname::Messages).to receive(:print).and_return("t")
-#       expect(MastermindSname::Messages.top_ten_head).to be_a String
-#     end
-#   end
-#   describe "#start_message" do
-#     let(:player_hash) { { name: "beginner", guesses_count: 3 } }
-#     let(:game_colours) { %w(r g y y) }
+  describe "#game_over" do
+    it "returns a string " do
+      expect(STDOUT).to receive(:puts).with("Game Over"\
+        ", You are out of Guesses")
+      @message.game_over
+    end
+  end
 
-#     it "returns a string " do
-#       allow(MastermindSname::Messages).to receive(:puts).and_return("t")
-#       expect(MastermindSname::Messages.
-#         start_message(player_hash, game_colours)).to be_a String
-#     end
-#   end
-# end
+  describe "#play_again" do
+    it "returns a string " do
+      expect(STDOUT).to receive(:puts).with("Do you want to play again? "\
+        "(y for yes/ press any other key to quit)")
+      @message.play_again
+    end
+  end
+end

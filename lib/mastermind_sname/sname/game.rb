@@ -4,12 +4,12 @@ module MastermindSname
   class Game
     include Input
     attr_accessor :game_colours, :guess, :player,
-                  :start_time, :user_guesses
+                  :start_time
     def initialize(player)
       @guesses = []
       @player = player
       @game_colours = GameColour.new(@player).get_colours
-      puts "#{@game_colours}"
+      puts @game_colours.join("")
       create_records_file unless File.file?("game_records.json")
       @message = Message.new
     end
@@ -31,7 +31,7 @@ module MastermindSname
     end
 
     def correct?
-      return true  if @guess == @game_colours.join("")
+      @guess == @game_colours.join("")
     end
 
     def create_records_file

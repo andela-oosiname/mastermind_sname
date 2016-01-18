@@ -78,14 +78,8 @@ describe "MastermindSname::Logic" do
   end
 
   describe "#time_format" do
-    before do
-      @logic = MastermindSname::GameLogic.new("rrgy", %w(r g r y))
-      @logic_2 = MastermindSname::GameLogic.new("rggg", %w(r g r y))
-    end
     it "returns 2m10s" do
       expect(130.time_format).to eq("2m10s")
     end
   end
-
-
 end

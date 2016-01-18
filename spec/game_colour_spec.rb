@@ -11,7 +11,7 @@ describe "MastermindSname::GameColour" do
   end
   describe "#get_colours" do
     it "returns 4" do
-      expect((@game_colour.get_colours).length).to be(4)
+      expect(@game_colour.get_colours.length).to be(4)
     end
 
     it "returns an array" do
@@ -19,7 +19,7 @@ describe "MastermindSname::GameColour" do
     end
 
     it "returns 8" do
-      expect((@game_colour_2.get_colours).length).to be(8)
+      expect(@game_colour_2.get_colours.length).to be(8)
     end
 
     it "returns an Array" do

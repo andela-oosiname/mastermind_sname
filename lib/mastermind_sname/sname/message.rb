@@ -9,8 +9,8 @@ module MastermindSname
       puts "Select your level: (b)eginner, (i)ntermediate, (a)dvanced"
     end
 
-    def congratulations_screen(player_hash)
-      @player_hash = player_hash
+    def congratulations_screen(player)
+      @player = player
       horizontal_stars
       vertical_stars
       body_message
@@ -51,11 +51,11 @@ module MastermindSname
 
     def body_message
       blank_space(10)
-      puts "CONGRATS! You got the sequence #{@player_hash[:game_colours].join}"
+      puts "CONGRATS! You got the sequence #{@player[:game_colours].join}"
       blank_space(10)
-      puts "LEVEL: #{@player_hash[:full_level]}"
+      puts "LEVEL: #{@player[:full_level]}"
       blank_space(10)
-      puts "GUESSES: #{@player_hash[:guesses_count]}"
+      puts "GUESSES: #{@player[:guesses_count]}"
     end
 
     def blank_space(n)
@@ -116,12 +116,12 @@ module MastermindSname
         \nEnter your name and level
         \nb - beginner, i - intermediate, a - advanced
         \nRandom code of elements. You have 10 guesses
-        \nTo view entry history, enter h at any time.
+        \nTo view guess history, enter h at any time.
         \nTo view sequence, enter c or cheat at any time
         \nTo quit the game enter q or quit.
         \nThe game is timed"
-      puts ""
-      Sname.start
+      print "\n"
+      Sname.new.start_choice("p")
     end
 
     def play_again
