@@ -24,7 +24,7 @@ module MastermindSname
     def start_guessing
       loop do
         collect_user_guess
-        puts record_guess
+        record_guess
         break if @guesses.length > 9 || correct?
       end
       puts game_end
@@ -84,7 +84,7 @@ module MastermindSname
       unless @guess == "h"
         @guesses << @guess
         correct?
-        @game_logic.get_feedback
+        puts @game_logic.get_feedback
       end
     end
   end
