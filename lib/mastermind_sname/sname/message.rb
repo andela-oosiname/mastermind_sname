@@ -19,14 +19,14 @@ module MastermindSname
     end
 
     def start(player, game_colours)
-      colours = "(r)ed, (g)reen, (y)ellow, (b)lue" if game_colours.length == 4
-      colours = "(r)ed, (g)reen, (y)ellow, (b)lue, (o)"\
+      @colours = "(r)ed, (g)reen, (y)ellow, (b)lue" if game_colours.length == 4
+      @colours = "(r)ed, (g)reen, (y)ellow, (b)lue, (o)"\
       "range" if game_colours.length == 6
-      colours = "(r)ed, (g)reen, (y)ellow, (b)lue, (o)"\
+      @colours = "(r)ed, (g)reen, (y)ellow, (b)lue, (o)"\
       "range, (v)iolet" if game_colours.length == 8
       "Hello #{player[:name]} I have generated a code with"\
       " #{game_colours.length} elements made up of a combination of"\
-      " any of: #{colours}... Can you guess the colour"
+      " any of: #{@colours}... Can you guess the colour"
     end
 
     def horizontal_stars
@@ -93,13 +93,6 @@ module MastermindSname
       puts "Would you like to (p)lay, (r)ead instructions or (q)uit"
     end
 
-    def border
-      59.times do
-        print "="
-      end
-      print "\n"
-    end
-
     def top_ten_head
       20.times do
         print "="
@@ -112,7 +105,7 @@ module MastermindSname
     end
 
     def get_instructions
-      print "Instructions\nEnter p to start
+      puts "Instructions\nEnter p to start
         \nEnter your name and level
         \nb - beginner, i - intermediate, a - advanced
         \nRandom code of elements. You have 10 guesses

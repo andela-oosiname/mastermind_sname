@@ -79,4 +79,22 @@ describe "MastermindSname::Message" do
       @message.splash_screen
     end
   end
+
+  describe "#splash_screen" do
+    let(:player) do
+      { name: "Ade", full_level: "beginner", guesses_count: 3 }
+    end
+    let(:game_colours) { %w(r r r y) }
+    it "returns a string " do
+      expect(@message.start(player, game_colours)).to be_a String
+    end
+  end
+
+  describe "#message_border" do
+    it "calls blank space " do
+      expect(@message).to receive(:blank_space).with(10)
+      expect(@message).to receive(:blank_space).with(20)
+      @message.message_border
+    end
+  end
 end
