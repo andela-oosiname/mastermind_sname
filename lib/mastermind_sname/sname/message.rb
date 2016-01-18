@@ -116,12 +116,12 @@ module MastermindSname
         \nEnter your name and level
         \nb - beginner, i - intermediate, a - advanced
         \nRandom code of elements. You have 10 guesses
-        \nTo view entry history, enter h at any time.
+        \nTo view guess history, enter h at any time.
         \nTo view sequence, enter c or cheat at any time
         \nTo quit the game enter q or quit.
         \nThe game is timed"
-      puts ""
-      Sname.start
+      print "\n"
+      Sname.new.start_choice("p")
     end
 
     def play_again

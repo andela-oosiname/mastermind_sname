@@ -4,7 +4,7 @@ require "mastermind_sname/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "mastermind_sname"
-  spec.version       = "1.0"
+  spec.version       = "2.0"
   spec.authors       = ["Olumuyiwa Osiname"]
   spec.email         = ["olumuyiwa.osiname@andela.com"]
   spec.summary       = ["This installs mastermind on the pc."]

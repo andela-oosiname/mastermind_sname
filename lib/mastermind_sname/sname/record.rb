@@ -9,8 +9,8 @@ module MastermindSname
     def set_new
       @record = get_record
       @record[@player[:full_level]] << {
-        "name" => @player[:name], "game_colours" => @player[:game_colours].join,
-        "guesses" => @player[:guesses_count], "times" => @player[:time] }
+        name: @player[:name], game_colours: @player[:game_colours].join,
+        guesses: @player[:guesses_count], time: @player[:time] }
       File.open("game_records.json", "w") { |f| f.write(@record.to_json) }
     end
 
@@ -35,6 +35,6 @@ end
 class Hash
   def stringify
     "#{self['name']} Guessed #{self['game_colours']} in "\
-    " #{self['guesses']} within #{self['times']} "
+    " #{self['guesses']} guesses within #{self['time']} "
   end
 end
