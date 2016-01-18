@@ -4,7 +4,7 @@ module MastermindSname
   class Game
     include Input
     attr_accessor :game_colours, :guess, :player,
-                  :start_time
+                  :start_time, :guesses
     def initialize(player)
       @guesses = []
       @player = player
@@ -84,7 +84,8 @@ module MastermindSname
       unless @guess == "h"
         @guesses << @guess
         correct?
-        puts @game_logic.get_feedback
+        @logic = GameLogic.new(@guess, @game_colours)
+        puts @logic.get_feedback
       end
     end
   end
