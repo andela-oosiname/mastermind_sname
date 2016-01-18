@@ -49,4 +49,34 @@ describe "MastermindSname::Message" do
       @message.play_again
     end
   end
+
+  describe "#congratulations_screen" do
+    let(:player) do
+      { game_colours: %w(r r r y),
+        full_level: "beginner", guesses_count: 3 }
+    end
+    it "calls #horizontal_stars" do
+      expect(@message).to receive(:horizontal_stars).twice
+      @message.congratulations_screen(player)
+    end
+
+    it "calls #vertical_stars" do
+      expect(@message).to receive(:vertical_stars).twice
+      @message.congratulations_screen(player)
+    end
+
+    it "calls #body_message" do
+      expect(@message).to receive(:body_message)
+      @message.congratulations_screen(player)
+    end
+  end
+
+  describe "#splash_screen" do
+    it "returns a string " do
+      expect(STDOUT).to receive(:puts).with("Would you like to (p)lay"\
+        ", (r)ead instructions or (q)uit")
+      expect(STDOUT).to receive(:puts).with("Welcome to MASTERMIND")
+      @message.splash_screen
+    end
+  end
 end
