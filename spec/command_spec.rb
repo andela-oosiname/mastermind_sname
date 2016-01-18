@@ -27,5 +27,10 @@ describe "MastermindSname::Commands" do
       @command.guesses = []
       expect(@command.get_history).to eq("No guesses yet")
     end
+    it "returns No guesses yet" do
+      @command.guesses = %w(rryg ggrys)
+      expect(STDOUT).to receive(:puts).with("Enter guess")
+      @command.get_history
+    end
   end
 end
