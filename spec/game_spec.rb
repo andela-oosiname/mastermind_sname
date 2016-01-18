@@ -30,6 +30,20 @@ describe "MastermindSname::Game" do
     end
   end
 
+  describe "#play" do
+    it "should call #start_guessing" do
+      allow(@game).to receive(:gets).and_return("j")
+      expect(@game).to receive(:start_guessing)
+      @game.play
+    end
+
+    it "should call #play_again" do
+      allow(@game).to receive(:gets).and_return("j")
+      expect(@game).to receive(:play_again)
+      @game.play
+    end
+  end
+
   describe "#create_records_file" do
     let(:echo_msg) do
       "echo '{\"beginner\":[],\"intermediate\":[],\"advanced\":[\]}' > g"\
