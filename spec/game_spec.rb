@@ -46,14 +46,4 @@ describe "MastermindSname::Game" do
       expect(@game.update_player).to be_a String
     end
   end
-
-  describe "#start_guessing" do
-    before do
-      @game_logic = MastermindSname::GameLogic.new("rrgy", %w(r g r y))
-    end
-    it "calls collect guess" do
-      expect(@game).to receive(:collect_user_guess)
-      @game.start_guessing
-    end
-  end
 end
