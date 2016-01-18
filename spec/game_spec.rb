@@ -5,7 +5,7 @@ describe "MastermindSname::Game" do
     @game = MastermindSname::Game.new(player)
     @game.guess = "rryg"
     @game.game_colours = %w(r r y y)
-    @guesses = []
+    @game.guesses = []
     @game.start_time = Time.now
   end
   describe "#correct?" do
@@ -44,6 +44,16 @@ describe "MastermindSname::Game" do
   describe "#update_player" do
     it "returns a string" do
       expect(@game.update_player).to be_a String
+    end
+  end
+
+  describe "#start_guessing" do
+    before do
+      @game.guesses =  %w(q q w r t y q w e r r)
+    end
+    it "calls collect guess" do
+      expect(@game).to receive(:collect_user_guess)
+      @game.start_guessing
     end
   end
 end
