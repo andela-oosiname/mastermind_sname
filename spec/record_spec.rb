@@ -1,8 +1,10 @@
 require "spec_helper"
 describe "MastermindSname::Record" do
   before do
-    @player = { "name" => "Ade",
-                "game_colours" => "rrrgy", "guesses" => 3, "times" => "22" }
+    @player = { "name" => "Ade", "full_level" => "beginner",
+                "game_colours" => "rrrgy", "guesses" => 3, "time" => "22" }
+    @player_2 = { name: "Ade", full_level: "beginner",
+                  game_colours: "rrrgy", guesses: 3, time: "22" }
     @data = MastermindSname::Record.new(@player)
   end
   describe "#get_record" do
