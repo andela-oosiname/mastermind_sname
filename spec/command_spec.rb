@@ -20,6 +20,10 @@ describe "MastermindSname::Commands" do
       expect { @command.action("q", @command.game_colours, @command.guesses) }.\
         to raise_error SystemExit
     end
+    it "exits the game" do
+      expect(@command).to receive(:get_history)
+      @command.action("h", @command.game_colours, @command.guesses)
+    end
   end
 
   describe "#get_history" do
