@@ -97,4 +97,11 @@ describe "MastermindSname::Message" do
       @message.message_border
     end
   end
+
+  describe "#top_ten_head" do
+    it "calls blank space " do
+      expect(STDOUT).to receive(:puts).with("Top Players")
+      @message.top_ten_head
+    end
+  end
 end

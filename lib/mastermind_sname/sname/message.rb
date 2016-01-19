@@ -97,7 +97,7 @@ module MastermindSname
       20.times do
         print "="
       end
-      print "Top Players"
+      puts "Top Players"
       20.times do
         print "="
       end

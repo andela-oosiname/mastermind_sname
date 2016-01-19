@@ -1,5 +1,6 @@
 module MastermindSname
   class Record
+    attr_accessor :player
     require "json"
 
     def initialize(player)
@@ -19,7 +20,6 @@ module MastermindSname
       record.first(10).each do |val|
         puts val.stringify
       end
-      print "\n"
     end
   end
 end

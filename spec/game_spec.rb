@@ -7,6 +7,7 @@ describe "MastermindSname::Game" do
     @game.game_colours = %w(r r y y)
     @game.guesses = []
     @game.start_time = Time.now
+    @game.player = player
   end
   describe "#correct?" do
     it "returns false" do
