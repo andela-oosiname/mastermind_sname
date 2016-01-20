@@ -3,11 +3,11 @@ require "spec_helper"
 describe "MastermindSname::GameColour" do
   let(:player_beginner) { { name: "Bayo", level: "b", full_level: "beginner" } }
   let(:player_advanced) { { name: "Bo", level: "a", full_level: "advanced" } }
-  let(:player_intermediat) { { name: "Bo", level: "i", full_level: "intermediate" } }
+  let(:player_intermediate) { { name: "Bo", level: "i", full_level: "intermediate" } }
   let(:colour_beginner) { MastermindSname::GameColour.new(player_beginner) }
   let(:colour_advanced) { MastermindSname::GameColour.new(player_advanced) }
-  let(:colour_intermediat) do
-    MastermindSname::GameColour.new(player_intermediat)
+  let(:colour_intermediate) do
+    MastermindSname::GameColour.new(player_intermediate)
   end
 
   context "#get_colours" do
@@ -34,7 +34,7 @@ describe "MastermindSname::GameColour" do
     end
 
     it "returns 6" do
-      expect(colour_intermediat.set_length).to eq(6)
+      expect(colour_intermediate.set_length).to eq(6)
     end
 
     it "returns 8" do

@@ -5,6 +5,14 @@ class Hash
   end
 end
 
+class Integer
+  def time_format
+    mins = self / 60
+    secs = self % 60
+    "#{mins}m#{secs}s"
+  end
+end
+
 module MastermindSname
   module Input
     def get_input
