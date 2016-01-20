@@ -1,15 +1,15 @@
 require_relative "game.rb"
 module MastermindSname
   class Command
-    attr_accessor :game_colours, :guesses
-    def initialize
-      @game_colours = game_colours
-    end
-
-    def action(guess, game_colours, guesses)
+    attr_accessor :guesses
+    def initialize(guess, game_colours, guesses)
       @game_colours = game_colours
       @guesses = guesses
-      case guess
+      @guess = guess
+    end
+
+    def action
+      case @guess
       when "quit", "q" then exit
       when "cheat", "c" then cheat_mode
       when "h", "history" then get_history

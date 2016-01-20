@@ -1,15 +1,14 @@
 require_relative "record.rb"
-require_relative "input.rb"
+require_relative "helper.rb"
 module MastermindSname
   class Game
     include Input
-    attr_accessor :game_colours, :guess, :player,
-                  :start_time, :guesses
-    def initialize(player)
+    attr_accessor :guess, :start_time, :guesses
+    def initialize(player, game_colours)
       @guesses = []
       @player = player
-      @game_colours = GameColour.new(@player).get_colours
-      puts @game_colours.join("")
+      @game_colours = game_colours
+      puts game_colours.join("")
       create_records_file unless File.file?("game_records.json")
       @message = Message.new
     end
@@ -48,6 +47,7 @@ module MastermindSname
     def game_end
       if correct?
         update_player
+        puts @player
         record = Record.new(@player)
         record.set_new
         @message.congratulations_screen @player
@@ -63,7 +63,7 @@ module MastermindSname
       loop do
         @game_logic = GameLogic.new(@guess, @game_colours)
         valid = @game_logic.valid_length? || @game_logic.input_command?
-        Command.new.action(@guess, @game_colours, @guesses)
+        Command.new(@guess, @game_colours, @guesses).action
         puts @game_logic.length_feedback unless valid
         @guess = get_input unless valid
         break if valid

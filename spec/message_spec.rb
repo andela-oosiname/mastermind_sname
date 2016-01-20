@@ -3,7 +3,7 @@ describe "MastermindSname::Message" do
   before do
     @message = MastermindSname::Message.new
   end
-  describe "#invalid_level" do
+  context "#invalid_level" do
     it "returns a string " do
       expect(STDOUT).to receive(:puts).with("Enter valid level,"\
        " \"b\" for Beginner, \"i\" for Intermediate, \"a\" for Advanced")
@@ -11,7 +11,7 @@ describe "MastermindSname::Message" do
     end
   end
 
-  describe "#get_level_message" do
+  context "#get_level_message" do
     it "returns a string " do
       expect(STDOUT).to receive(:puts).with("Select your level:"\
         " (b)eginner, (i)ntermediate, (a)dvanced")
@@ -19,14 +19,14 @@ describe "MastermindSname::Message" do
     end
   end
 
-  describe "#goodbye_message" do
+  context "#goodbye_message" do
     it "returns a string " do
       expect(STDOUT).to receive(:puts).with("Thank you for playing MASTERMIND")
       @message.goodbye_message
     end
   end
 
-  describe "#cheat" do
+  context "#cheat" do
     let(:game_colours) { %w(r r y g) }
     it "returns a string " do
       expect(@message.cheat(game_colours)).to eq("The"\
@@ -34,7 +34,7 @@ describe "MastermindSname::Message" do
     end
   end
 
-  describe "#game_over" do
+  context "#game_over" do
     it "returns a string " do
       expect(STDOUT).to receive(:puts).with("Game Over"\
         ", You are out of Guesses")
@@ -42,7 +42,7 @@ describe "MastermindSname::Message" do
     end
   end
 
-  describe "#play_again" do
+  context "#play_again" do
     it "returns a string " do
       expect(STDOUT).to receive(:puts).with("Do you want to play again? "\
         "(y for yes/ press any other key to quit)")
@@ -50,7 +50,7 @@ describe "MastermindSname::Message" do
     end
   end
 
-  describe "#congratulations_screen" do
+  context "#congratulations_screen" do
     let(:player) do
       { game_colours: %w(r r r y),
         full_level: "beginner", guesses_count: 3 }
@@ -71,7 +71,7 @@ describe "MastermindSname::Message" do
     end
   end
 
-  describe "#splash_screen" do
+  context "#splash_screen" do
     it "returns a string " do
       expect(STDOUT).to receive(:puts).with("Would you like to (p)lay"\
         ", (r)ead instructions or (q)uit")
@@ -80,7 +80,7 @@ describe "MastermindSname::Message" do
     end
   end
 
-  describe "#splash_screen" do
+  context "#splash_screen" do
     let(:player) do
       { name: "Ade", full_level: "beginner", guesses_count: 3 }
     end
@@ -90,7 +90,7 @@ describe "MastermindSname::Message" do
     end
   end
 
-  describe "#message_border" do
+  context "#message_border" do
     it "calls blank space " do
       expect(@message).to receive(:blank_space).with(10)
       expect(@message).to receive(:blank_space).with(20)
@@ -98,7 +98,7 @@ describe "MastermindSname::Message" do
     end
   end
 
-  describe "#top_ten_head" do
+  context "#top_ten_head" do
     it "calls blank space " do
       expect(STDOUT).to receive(:puts).with("Top Players")
       @message.top_ten_head

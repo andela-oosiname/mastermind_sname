@@ -7,13 +7,13 @@ describe "MastermindSname::Sname" do
     @player = MastermindSname::Player.new
   end
 
-  describe "#start_choice" do
+  context "#start_choice" do
     it "returns a string " do
       expect { @sname.start_choice("q") }.to raise_error SystemExit
     end
   end
 
-  describe "#start" do
+  context "#start" do
     it "starts the game" do
       allow(@sname).to receive(:gets).and_return("p")
       expect(@sname).to receive(:start_choice).with("p")

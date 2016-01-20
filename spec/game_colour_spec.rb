@@ -1,43 +1,44 @@
 require "spec_helper"
 
 describe "MastermindSname::GameColour" do
-  before do
-    player = { name: "Bayo", level: "b", full_level: "beginner" }
-    @game_colour = MastermindSname::GameColour.new(player)
-    player_2 = { name: "Bo", level: "a", full_level: "advanced" }
-    @game_colour_2 = MastermindSname::GameColour.new(player_2)
-    player_3 = { name: "Bo", level: "i", full_level: "intermediate" }
-    @game_colour_3 = MastermindSname::GameColour.new(player_3)
+  let(:player_beginner) { { name: "Bayo", level: "b", full_level: "beginner" } }
+  let(:player_advanced) { { name: "Bo", level: "a", full_level: "advanced" } }
+  let(:player_intermediat) { { name: "Bo", level: "i", full_level: "intermediate" } }
+  let(:colour_beginner) { MastermindSname::GameColour.new(player_beginner) }
+  let(:colour_advanced) { MastermindSname::GameColour.new(player_advanced) }
+  let(:colour_intermediat) do
+    MastermindSname::GameColour.new(player_intermediat)
   end
-  describe "#get_colours" do
+
+  context "#get_colours" do
     it "returns 4" do
-      expect(@game_colour.get_colours.length).to be(4)
+      expect(colour_beginner.get.length).to be(4)
     end
 
     it "returns an array" do
-      expect(@game_colour.get_colours).to be_a Array
+      expect(colour_beginner.get).to be_a Array
     end
 
     it "returns 8" do
-      expect(@game_colour_2.get_colours.length).to be(8)
+      expect(colour_advanced.get.length).to be(8)
     end
 
     it "returns an Array" do
-      expect(@game_colour_2.get_colours).to be_a Array
+      expect(colour_advanced.get).to be_a Array
     end
   end
 
-  describe "#get_colours" do
+  context "#get_colours" do
     it "returns 4" do
-      expect(@game_colour.set_length_of_colours).to eq(4)
+      expect(colour_beginner.set_length).to eq(4)
     end
 
     it "returns 6" do
-      expect(@game_colour_3.set_length_of_colours).to eq(6)
+      expect(colour_intermediat.set_length).to eq(6)
     end
 
     it "returns 8" do
-      expect(@game_colour_2.set_length_of_colours).to eq(8)
+      expect(colour_advanced.set_length).to eq(8)
     end
   end
 end
