@@ -1,17 +1,17 @@
 module MastermindSname
   class Player
     include Input
-    attr_accessor :level, :name
+    attr_accessor :level
 
     def initialize
       @message = Message.new
     end
 
-    def set_player
-      { name: set_player_name, level: set_level, full_level: set_full_level }
+    def set
+      { name: set_name, level: set_level, full_level: set_full_level }
     end
 
-    def set_player_name
+    def set_name
       puts "Enter first name"
       @name = get_input
       @name.capitalize!

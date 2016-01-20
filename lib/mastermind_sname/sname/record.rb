@@ -1,13 +1,21 @@
+require_relative "helper"
 module MastermindSname
   class Record
-    attr_accessor :player
     require "json"
 
     def initialize(player)
       @player = player
     end
 
-    def get_record
+    def set_new
+      @record = get
+      @record[@player[:full_level]] << {
+        name: @player[:name], game_colours: @player[:game_colours].join,
+        guesses: @player[:guesses_count], time: @player[:time] }
+      File.open("game_records.json", "w") { |f| f.write(@record.to_json) }
+    end
+
+    def get
       json = File.read("game_records.json")
       obj = JSON.parse(json)
       obj
@@ -16,17 +24,10 @@ module MastermindSname
     def display_top_ten
       Message.new.top_ten_head
       level = @player[:full_level]
-      record = get_record[level].sort_by { |hsh| hsh["guesses"] }
+      record = get[level].sort_by { |hsh| hsh["guesses"] }
       record.first(10).each do |val|
         puts val.stringify
       end
     end
-  end
-end
-
-class Hash
-  def stringify
-    "#{self['name']} Guessed #{self['game_colours']} in "\
-    " #{self['guesses']} guesses within #{self['time']} "
   end
 end

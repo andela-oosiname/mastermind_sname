@@ -43,22 +43,22 @@ module MastermindSname
     def vertical_stars
       3.times do
         print "*"
-        blank_space(59)
+        blank_space 59
         print "*"
         print "\n"
       end
     end
 
     def body_message
-      blank_space(10)
+      blank_space 10
       puts "CONGRATS! You got the sequence #{@player[:game_colours].join}"
-      blank_space(10)
+      blank_space 10
       puts "LEVEL: #{@player[:full_level]}"
-      blank_space(10)
+      blank_space 10
       puts "GUESSES: #{@player[:guesses_count]}"
     end
 
-    def blank_space(n)
+    def blank_space n
       n.times do
         print " "
       end

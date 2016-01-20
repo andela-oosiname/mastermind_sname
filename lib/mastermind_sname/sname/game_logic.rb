@@ -12,7 +12,7 @@ module MastermindSname
 
     def input_command?
       commands = [:cheat, :exit, :h, :c, :q, :quit]
-      true if commands.include?(@guess.to_sym)
+      commands.include?(@guess.to_sym)
     end
 
     def valid_length?
