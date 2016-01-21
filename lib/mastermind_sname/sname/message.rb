@@ -58,7 +58,7 @@ module MastermindSname
       puts "GUESSES: #{@player[:guesses_count]}"
     end
 
-    def blank_space n
+    def blank_space(n)
       n.times do
         print " "
       end

@@ -6,6 +6,9 @@ describe "MastermindSname::Commands" do
   let(:command_history) do
     MastermindSname::Command.new("h", game_colours, guesses)
   end
+  let(:command_empty_history) do
+    MastermindSname::Command.new("h", game_colours, [])
+  end
   let(:command_exit) do
     MastermindSname::Command.new("q", game_colours, guesses)
   end
@@ -32,11 +35,9 @@ describe "MastermindSname::Commands" do
 
   context "#get_history" do
     it "returns No guesses yet" do
-      command_history.guesses = []
-      expect(command_history.get_history).to eq("No guesses yet")
+      expect(command_empty_history.get_history).to eq("No guesses yet")
     end
     it "returns No guesses yet" do
-      command_history.guesses = %w(rryg ggrys)
       expect(STDOUT).to receive(:puts).with("Enter guess")
       command_history.get_history
     end

@@ -1,7 +1,6 @@
 require_relative "game.rb"
 module MastermindSname
   class Command
-    attr_accessor :guesses
     def initialize(guess, game_colours, guesses)
       @game_colours = game_colours
       @guesses = guesses
