@@ -4,18 +4,18 @@ module MastermindSname
   class Game
     include Input
     attr_accessor :guess, :start_time, :guesses
-    def initialize(player, game_colours)
+    def initialize(player, colours)
       @guesses = []
       @player = player
-      @game_colours = game_colours
-      puts game_colours.join("")
+      @colours = colours
+      puts colours.join("")
       create_records_file unless File.file?("game_records.json")
       @message = Message.new
     end
 
     def play
       @start_time = Time.now
-      puts @message.start(@player, @game_colours)
+      puts @message.start(@player, @colours)
       start_guessing
       play_again
     end
@@ -30,7 +30,7 @@ module MastermindSname
     end
 
     def correct?
-      @guess == @game_colours.join("")
+      @guess == @colours.join("")
     end
 
     def create_records_file
@@ -40,7 +40,7 @@ module MastermindSname
 
     def update_player
       @player[:guesses_count] = @guesses.length
-      @player[:game_colours] = @game_colours
+      @player[:colours] = @colours
       @player[:time] = (Time.now - @start_time).round.time_format
     end
 
@@ -48,7 +48,7 @@ module MastermindSname
       if correct?
         update_player
         puts @player
-        record = Record.new(@player)
+        record = Record.new @player
         record.set_new
         @message.congratulations_screen @player
         record.display_top_ten
@@ -61,9 +61,9 @@ module MastermindSname
       puts "#{10 - @guesses.length} guess(es) left" unless @guesses.empty?
       @guess = get_input
       loop do
-        @game_logic = GameLogic.new(@guess, @game_colours)
+        @game_logic = GameLogic.new(@guess, @colours)
         valid = @game_logic.valid_length? || @game_logic.input_command?
-        Command.new(@guess, @game_colours, @guesses).action
+        Command.new(@guess, @colours, @guesses).action
         puts @game_logic.length_feedback unless valid
         @guess = get_input unless valid
         break if valid
@@ -84,7 +84,7 @@ module MastermindSname
       unless @guess == "h"
         @guesses << @guess
         correct?
-        @logic = GameLogic.new(@guess, @game_colours)
+        @logic = GameLogic.new(@guess, @colours)
         puts @logic.get_feedback
       end
     end

@@ -2,7 +2,7 @@ require "spec_helper"
 describe "MastermindSname::Record" do
   let(:player) do
     { name: "Ade", full_level: "beginner",
-      game_colours: "rrrgy", guesses: 3, time: "22" }
+      colours: "rrrgy", guesses: 3, time: "22" }
   end
   let(:record) { MastermindSname::Record.new(player) }
 
@@ -21,10 +21,10 @@ describe "MastermindSname::Record" do
   context "#stringify" do
     let(:player) do
       { "name" => "Ade", "full_level" => "beginner",
-        "game_colours" => "rrrgy", "guesses" => 3, "time" => "22" }
+        "colours" => "rrrgy", "guesses" => 3, "time" => "22" }
     end
     let(:value) do
-      "#{player['name']} Guessed #{player['game_colours']} in "\
+      "#{player['name']} Guessed #{player['colours']} in "\
       " #{player['guesses']} guesses within #{player['time']} "
     end
 

@@ -18,14 +18,14 @@ module MastermindSname
       horizontal_stars
     end
 
-    def start(player, game_colours)
-      @colours = "(r)ed, (g)reen, (y)ellow, (b)lue" if game_colours.length == 4
+    def start(player, colours)
+      @colours = "(r)ed, (g)reen, (y)ellow, (b)lue" if colours.length == 4
       @colours = "(r)ed, (g)reen, (y)ellow, (b)lue, (o)"\
-      "range" if game_colours.length == 6
+      "range" if colours.length == 6
       @colours = "(r)ed, (g)reen, (y)ellow, (b)lue, (o)"\
-      "range, (v)iolet" if game_colours.length == 8
+      "range, (v)iolet" if colours.length == 8
       "Hello #{player[:name]} I have generated a code with"\
-      " #{game_colours.length} elements made up of a combination of"\
+      " #{colours.length} elements made up of a combination of"\
       " any of: #{@colours}... Can you guess the colour"
     end
 
@@ -36,8 +36,8 @@ module MastermindSname
       print "\n"
     end
 
-    def cheat(game_colours)
-      "The sequence is #{game_colours.join}"
+    def cheat(colours)
+      "The sequence is #{colours.join}"
     end
 
     def vertical_stars
@@ -51,7 +51,7 @@ module MastermindSname
 
     def body_message
       blank_space 10
-      puts "CONGRATS! You got the sequence #{@player[:game_colours].join}"
+      puts "CONGRATS! You got the sequence #{@player[:colours].join}"
       blank_space 10
       puts "LEVEL: #{@player[:full_level]}"
       blank_space 10
@@ -65,12 +65,12 @@ module MastermindSname
     end
 
     def message_border
-      blank_space(10)
+      blank_space 10
       56.times do
         print "="
       end
       print "\n"
-      blank_space(20)
+      blank_space 20
     end
 
     def goodbye_message
@@ -82,14 +82,14 @@ module MastermindSname
     end
 
     def splash_screen
-      blank_space(10)
+      blank_space 10
       56.times do
         print "="
       end
       print "\n"
-      blank_space(10)
+      blank_space 10
       puts "Welcome to MASTERMIND"
-      blank_space(10)
+      blank_space 10
       puts "Would you like to (p)lay, (r)ead instructions or (q)uit"
     end
 
@@ -114,7 +114,7 @@ module MastermindSname
         \nTo quit the game enter q or quit.
         \nThe game is timed"
       print "\n"
-      Sname.new.start_choice("p")
+      Sname.new.start_choice "p"
     end
 
     def play_again

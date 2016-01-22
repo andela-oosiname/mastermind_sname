@@ -1,6 +1,7 @@
 require "spec_helper"
 describe "MastermindSname::Message" do
   let(:message) { MastermindSname::Message.new }
+
   context "#invalid_level" do
     it "returns a string " do
       expect(STDOUT).to receive(:puts).with("Enter valid level,"\
@@ -25,10 +26,10 @@ describe "MastermindSname::Message" do
   end
 
   context "#cheat" do
-    let(:game_colours) { %w(r r y g) }
+    let(:colours) { %w(r r y g) }
     it "returns a string " do
-      expect(message.cheat(game_colours)).to eq("The"\
-        " sequence is #{game_colours.join}")
+      expect(message.cheat(colours)).to eq("The"\
+        " sequence is #{colours.join}")
     end
   end
 
@@ -50,9 +51,10 @@ describe "MastermindSname::Message" do
 
   context "#congratulations_screen" do
     let(:player) do
-      { game_colours: %w(r r r y),
+      { colours: %w(r r r y),
         full_level: "beginner", guesses_count: 3 }
     end
+
     it "calls #horizontal_stars" do
       expect(message).to receive(:horizontal_stars).twice
       message.congratulations_screen(player)
@@ -82,9 +84,9 @@ describe "MastermindSname::Message" do
     let(:player) do
       { name: "Ade", full_level: "beginner", guesses_count: 3 }
     end
-    let(:game_colours) { %w(r r r y) }
+    let(:colours) { %w(r r r y) }
     it "returns a string " do
-      expect(message.start(player, game_colours)).to be_a String
+      expect(message.start(player, colours)).to be_a String
     end
   end
 
