@@ -15,12 +15,12 @@ module MastermindSname
       start_choice get_input
     end
 
-    def start_choice(user_choice)
-      case user_choice
+    def start_choice(choice)
+      case choice
       when "p", "play"
         player = Player.new.set
-        game_colours = GameColour.new(player).get
-        Game.new(player, game_colours).play
+        colours = GameColour.new(player).get
+        Game.new(player, colours).play
       when "q", "quit" then exit
       when "r", "read" then @message.get_instructions
       end

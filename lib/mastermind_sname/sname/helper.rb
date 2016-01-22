@@ -1,6 +1,6 @@
 class Hash
   def stringify
-    "#{self['name']} Guessed #{self['game_colours']} in "\
+    "#{self['name']} Guessed #{self['colours']} in "\
     " #{self['guesses']} guesses within #{self['time']} "
   end
 end

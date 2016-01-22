@@ -1,8 +1,8 @@
 require "spec_helper"
 describe "MastermindSname::Game" do
   let(:player) { { name: "Ade", level: "b", full_level: "beginner" } }
-  let(:game_colours) { %w(r r y y) }
-  let(:game) { MastermindSname::Game.new(player, game_colours) }
+  let(:colours) { %w(r r y y) }
+  let(:game) { MastermindSname::Game.new(player, colours) }
   before :each do
     game.guess = "rryg"
     game.start_time = Time.now

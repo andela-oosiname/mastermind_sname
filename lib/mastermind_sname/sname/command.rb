@@ -1,8 +1,8 @@
 require_relative "game.rb"
 module MastermindSname
   class Command
-    def initialize(guess, game_colours, guesses)
-      @game_colours = game_colours
+    def initialize(guess, colours, guesses)
+      @colours = colours
       @guesses = guesses
       @guess = guess
     end
@@ -16,7 +16,7 @@ module MastermindSname
     end
 
     def cheat_mode
-      puts Message.new.cheat(@game_colours)
+      puts Message.new.cheat @colours
       exit
     end
 
